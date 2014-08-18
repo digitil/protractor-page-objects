@@ -17,6 +17,7 @@
     "sinon-chai": "^2.5.0"
   },
   "devDependencies": {
+    "chromedriver": "^2.10.0-1",
     "express": "^4.8.4",
     "jshint": "^2.5.3",
     "mocha": "^1.21.4",

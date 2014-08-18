@@ -6,5 +6,7 @@ exports.config = {
 
     baseUrl: 'http://' + host + ':' + port,
 
+    chromeDriver: '../node_modules/chromedriver/bin/chromedriver',
+
     chromeOnly: true
 };
