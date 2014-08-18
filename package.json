@@ -1,0 +1,41 @@
+{
+  "name": "compass-for-protractor",
+  "version": "0.1.0",
+  "description": "A component wrapper around Angular's Protractor Framework",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "express": "^4.8.3",
+    "jshint": "^2.5.3",
+    "protractor": "^1.0.0",
+    "sinon": "^1.10.3",
+    "sinon-chai": "^2.5.0"
+  },
+  "devDependencies": {
+    "express": "^4.8.4",
+    "jshint": "^2.5.3",
+    "mocha": "^1.21.4",
+    "sinon": "^1.10.3",
+    "sinon-chai": "^2.5.0"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/digitil/compass-for-protractor.git"
+  },
+  "keywords": [
+    "angular",
+    "protractor",
+    "e2e",
+    "api"
+  ],
+  "author": "Calvin McEachron <calvin@digitil.me>",
+  "license": "MIT"
+}
