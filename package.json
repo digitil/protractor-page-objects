@@ -10,6 +10,7 @@
   "dependencies": {
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
+    "change-case": "^2.1.4",
     "express": "^4.8.3",
     "jshint": "^2.5.3",
     "protractor": "^1.0.0",

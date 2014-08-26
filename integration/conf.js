@@ -8,5 +8,10 @@ exports.config = {
 
     chromeDriver: '../node_modules/chromedriver/bin/chromedriver',
 
-    chromeOnly: true
+    chromeOnly: true,
+
+    jasmineNodeOpts: {
+        isVerbose: true,
+        showColors: true
+    }
 };

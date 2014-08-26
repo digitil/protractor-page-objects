@@ -1,3 +1,5 @@
+var changeCase = require('change-case');
+
 /**
  * @module compass-for-protractor
  */
@@ -15,6 +17,7 @@ var compass = function(options) {
 };
 
 compass.prototype.addPage = function(name, path, params) {
+    name = changeCase.pascalCase(name);
     this[name] = new compass.Page(path, params);
     return this[name];
 };
