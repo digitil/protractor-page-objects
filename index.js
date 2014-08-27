@@ -1,5 +1,5 @@
 var changeCase = require('change-case');
-var functions = require('lib/functions');
+var functions = require('./lib/functions');
 
 /**
  * @module compass-for-protractor
