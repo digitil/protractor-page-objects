@@ -1,4 +1,5 @@
 var changeCase = require('change-case');
+var functions = require('lib/functions');
 
 /**
  * @module compass-for-protractor
@@ -8,7 +9,7 @@ var compass = function(options) {
     var queryParams;
 
     if (options.queryParams) {
-        queryParams = util.objectToQueryStr(options.queryParams);
+        queryParams = functions.objectToQueryStr(options.queryParams);
     }
 
     this.getQueryParams = function() {
