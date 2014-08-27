@@ -108,6 +108,7 @@ describe('Component', function() {
                 expect(component.getName()).to.equal('newName');
                 expect(component.getLocator()).to.equal('.newSelector');
                 expect(component.getParent()).to.equal(parent);
+                expect(component.parent()).to.equal(parent);
             });
 
             it('should update hierarchical information', function(){
@@ -261,6 +262,14 @@ describe('Component', function() {
                 sinon.spy(component, 'detach');
                 try { component.detach(); } catch(error) {}
                 expect(component.detach).to.have.thrown('Error');
+            });
+        });
+
+        describe('getParent method', function() {
+            it('should return the parent Component', function() {
+                var child = component.addComponent('hello', '.world');
+                expect(child.getParent()).to.equal(component);
+                expect(child.parent()).to.equal(component);
             });
         });
     });
