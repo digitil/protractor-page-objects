@@ -2,6 +2,7 @@ var sinon = require('sinon');
 var expect = require('chai').use(require('sinon-chai')).expect;
 var Page = require('../lib/Page');
 var View = require('../lib/View');
+var Component = require('../lib/Component');
 
 // jshint expr:true
 
@@ -76,5 +77,26 @@ describe('Page', function() {
         sinon.spy(page, 'getView');
         try { page.getView('myView'); } catch(error) {}
         expect(page.getView).to.have.thrown('Error');
+    });
+
+    describe('addComponent method', function() {
+        beforeEach(function() {
+            page = new Page('home/page');
+        });
+
+        it('should create Component children', function() {
+            page.addComponent('componentName', '.componentSelector');
+            expect(page).to.have.property('componentName');
+            expect(page.componentName).to.be.an.instanceof(Component);
+        });
+
+        it('should return the created Component', function() {
+            var component = page.addComponent('componentName', '.componentSelector');
+            expect(component).to.be.an.instanceof(Component);
+        });
+
+        it('should be available as alias "component"', function() {
+            expect(page.addComponent).to.equal(page.component);
+        });
     });
 });
