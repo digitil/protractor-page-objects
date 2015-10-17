@@ -1,6 +1,6 @@
-var sinon = require('sinon');
-var expect = require('chai').use(require('sinon-chai')).expect;
-var compass = require('../index');
+var sinon = require('./deps').sinon;
+var expect = require('./deps').expect;
+var compass = require('./deps').compass;
 
 describe('Compass', function() {
     var app;

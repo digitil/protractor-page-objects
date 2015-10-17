@@ -1,4 +1,4 @@
-var compass = require('../index');
+var compass = require('../../index');
 var app = new compass();
 var Page = app.addPage('Page', '#/');
 

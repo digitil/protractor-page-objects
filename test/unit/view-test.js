@@ -1,6 +1,6 @@
-var sinon = require('sinon');
-var expect = require('chai').use(require('sinon-chai')).expect;
-var View = require('../lib/View');
+var sinon = require('./deps').sinon;
+var expect = require('./deps').expect;
+var View = require('./deps').View;
 
 // jshint expr:true
 describe('View', function() {

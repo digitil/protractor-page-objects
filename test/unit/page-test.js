@@ -1,8 +1,8 @@
-var sinon = require('sinon');
-var expect = require('chai').use(require('sinon-chai')).expect;
-var Page = require('../lib/Page');
-var View = require('../lib/View');
-var Component = require('../lib/Component');
+var sinon = require('./deps').sinon;
+var expect = require('./deps').expect;
+var Page = require('./deps').Page;
+var View = require('./deps').View;
+var Component = require('./deps').Component;
 
 // jshint expr:true
 
