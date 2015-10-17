@@ -10,5 +10,5 @@ gulp.task('protractor', function () {
 
     return gulp.src(['./test/integration/*.spec.js'])
         .pipe(protractor(config))
-        .on('error', function(e) { throw e });
+        .on('error', function (e) { throw e });
 });

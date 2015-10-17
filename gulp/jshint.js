@@ -1,9 +1,9 @@
 var jshint = require('gulp-jshint');
 var gulp   = require('gulp');
  
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
     var javascript = ['lib', 'test']
-        .map(function(dir) {
+        .map(function (dir) {
             return './' + dir + '/**/*.js';
         });
 
