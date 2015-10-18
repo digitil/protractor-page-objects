@@ -1,0 +1,20 @@
+{
+    "curly": true,
+    "eqeqeq": true,
+    "freeze": true,
+    "futurehostile": true,
+    "latedef": true,
+    "maxcomplexity": 3,
+    "maxdepth": 2,
+    "maxparams": 3,
+    "maxstatements": 15,
+    "noarg": true,
+    "nocomma": true,
+    "nonbsp": true,
+    "nonew": true,
+    "singleGroups": true,
+    "strict": true,
+    "undef": true,
+    "unused": "strict",
+    "node": true
+}

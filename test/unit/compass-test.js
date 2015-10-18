@@ -1,27 +1,46 @@
 var sinon = require('./deps').sinon;
 var expect = require('./deps').expect;
-var compass = require('./deps').compass;
+var PageObjects = require('./deps').PageObjects;
+var Page = require('./deps').Page;
 
-describe('Compass', function() {
+describe('PageObjects', function () {
     var app;
 
-    beforeEach(function() {
-        app = new compass();
-    });
+    describe('constructor', function () {
+        it('should create Page objects from an array of PageDefinition objects', function () {
+            app = new PageObjects([
+                {$name: 'pageOne'},
+                {$name: 'pageTwo'},
+                {$name: 'pageThree'}
+            ]);
 
-    describe('addPage method', function() {
-        it('should try to normalize Page names to PascalCase', function() {
-            app.addPage('oneword');
-            expect(app).to.have.property('Oneword');
-            app.addPage('two words');
-            expect(app).to.have.property('TwoWords');
+            expect(app).to.have.property('pageOne');
+            expect(app).to.have.property('pageTwo');
+            expect(app.pageThree).to.be.an.instanceof(Page);
         });
 
-        it('should try to replace underscores and hyphens', function() {
-            app.addPage('hyphenated-words');
-            expect(app).to.have.property('HyphenatedWords');
-            app.addPage('under_score');
-            expect(app).to.have.property('UnderScore');
+        it('should create Page objects from PageDefinition arguments', function () {
+            app = new PageObjects({$name: 'pageOne'}, {$name: 'pageTwo'}, {$name: 'pageThree'});
+
+            expect(app).to.have.property('pageOne');
+            expect(app).to.have.property('pageTwo');
+            expect(app.pageThree).to.be.an.instanceof(Page);
         });
     });
+
+    describe('$$page factory method', function () {
+        beforeEach(function() {
+            app = new PageObjects();
+        });
+        
+        it('should create a new Page', function () {
+            app.$$page({
+                $name: 'Home'
+            });
+
+            expect(app).to.have.property('Home');
+            expect(app.Home).to.be.an.instanceof(Page);
+        });
+    });
+
 });

@@ -6,7 +6,11 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
  
 gulp.task('jsdoc', function () {
-    return gulp.src('lib/*.js')
+    var sources = [
+        'lib/**/*.js'
+    ];
+
+    return gulp.src(sources)
         .pipe(concat('api.md'))
         .pipe(jsdoc2md())
         .on('error', function (err) { gutil.log(gutil.colors.red('jsdoc2md failed'), err.message); })

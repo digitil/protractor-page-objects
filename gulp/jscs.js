@@ -6,7 +6,7 @@ gulp.task('jscs', function () {
         fix: true
     };
 
-    return gulp.src('lib/*.js')
+    return gulp.src('lib/**/*.js')
         .pipe(jscs(options))
         .pipe(jscs.reporter())
         .pipe(jscs.reporter('fail'))

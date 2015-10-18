@@ -4,7 +4,7 @@ var gulp   = require('gulp');
 gulp.task('jshint', function () {
     var javascript = ['lib', 'test']
         .map(function (dir) {
-            return './' + dir + '/**/*.js';
+            return dir + '/**/*.js';
         });
 
     return gulp.src(javascript)

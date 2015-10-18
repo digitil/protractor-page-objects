@@ -126,6 +126,9 @@ function of that component type</p>
 <dt><a href="#getView">getView(name)</a> ⇒ <code><a href="#View">View</a></code></dt>
 <dd><p>Retrieves a View and throws an error if that View is not found</p>
 </dd>
+<dt><a href="#$$register">$$register(definition)</a></dt>
+<dd><p>The $$register method is used to create new page objects</p>
+</dd>
 <dt><a href="#set">set(name, locator)</a></dt>
 <dd><p>Set the name and locator of this view. Changes will recurse down to children</p>
 </dd>
@@ -162,8 +165,8 @@ Component
 <a name="new_Component_new"></a>
 ### new Component(name, locator, parent)
 A Component can be defined application-wide or be a part of a page.
-You can define elements and methods on a Component. If no arguments 
-are passed to the constructor, an empty Component instance is returned 
+You can define elements and methods on a Component. If no arguments
+are passed to the constructor, an empty Component instance is returned
 to faciliate cloning
 
 
@@ -175,7 +178,7 @@ to faciliate cloning
 
 <a name="Component.mixin"></a>
 ### Component.mixin([Constructor])
-Provides access to methods that are appropriate for supporting 
+Provides access to methods that are appropriate for supporting
 Component in other classes such as View
 
 **Kind**: static method of <code>[Component](#Component)</code>  
@@ -189,15 +192,32 @@ Component in other classes such as View
 Page
 
 **Kind**: global class  
+
+* [Page](#Page)
+  * [new Page(options)](#new_Page_new)
+  * [~PageDefinition](#Page..PageDefinition) : <code>Object</code>
+
 <a name="new_Page_new"></a>
-### new Page(path, params)
+### new Page(options)
 A Page represents one of the main application pages.
 
 
 | Param | Type |
 | --- | --- |
-| path | <code>String</code> | 
-| params | <code>Object</code> | 
+| options | <code>PageDefinition</code> | 
+
+<a name="Page..PageDefinition"></a>
+### Page~PageDefinition : <code>Object</code>
+The definition object for a Page
+
+**Kind**: inner typedef of <code>[Page](#Page)</code>  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| $name | <code>String</code> | the name of the page |
+| $path | <code>String</code> | the relative path to this page |
+| $params | <code>Object</code> | a set of query params to set when navigating to this page |
 
 <a name="View"></a>
 ## View
@@ -597,6 +617,16 @@ Retrieves a View and throws an error if that View is not found
 | Param | Type |
 | --- | --- |
 | name | <code>String</code> | 
+
+<a name="$$register"></a>
+## $$register(definition)
+The $$register method is used to create new page objects
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| definition | <code>PageDefinition</code> | 
 
 <a name="set"></a>
 ## set(name, locator)

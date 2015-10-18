@@ -1,8 +1,8 @@
 module.exports = {
     sinon: require('sinon'),
     expect: require('chai').use(require('sinon-chai')).expect,
-    compass: require('../../index'),
-    Page: require('../../lib/Page'),
-    View: require('../../lib/View'),
-    Component: require('../../lib/Component'),
-}
+    PageObjects: require('../../index'),
+    Page: require('../../lib/page/page'),
+    View: require('../../lib/view/view'),
+    Component: require('../../lib/component/component')
+};

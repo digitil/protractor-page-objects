@@ -1,10 +1,20 @@
-var compass = require('../../index');
-var app = new compass();
-var Page = app.addPage('Page', '#/');
+var PageObjects = require('../../index');
 
-Page.addView('Form', '[ng-view]');
-Page.addView('Repeater', '[ng-view]');
-
-Page.repeaterLink = new compass.Component('repeaterLink', by.linkText('repeater'));
+var app = new PageObjects([
+    {
+        $name: 'Page',
+        $path: '#/',
+        $views: [
+            require('./pages/form.po'),
+            require('./pages/repeater.po')
+        ],
+        $components: [
+            {
+                $name: 'repeaterLink',
+                $locator: by.linkText('repeater')
+            }
+        ]
+    }
+]);
 
 module.exports = app;
