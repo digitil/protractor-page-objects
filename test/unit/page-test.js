@@ -16,20 +16,6 @@ describe('Page', function() {
         });
     });
 
-    describe('getQueryParams method', function () {
-        it('should return a query string representation of the object definition\'s params', function() {
-            page = new Page({
-                $params: {test: true, fail: false}
-            });
-            expect(page.getQueryParams()).to.equal('?test=true&fail=false');
-        });
-
-        it('should always return a string', function () {
-            page = new Page({});
-            expect(page.getQueryParams()).to.equal('');            
-        });
-    });
-
     describe('goTo method', function() {
         var path;
 
@@ -91,7 +77,7 @@ describe('Page', function() {
 
             expect(page).to.have.property('myView');
             expect(page.myView).to.be.an.instanceof(View);
-            expect(page.myView.getParent()).to.equal(page);
+            expect(page.myView.$parent).to.equal(page);
         });
     });
 

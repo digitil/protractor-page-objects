@@ -125,7 +125,7 @@ describe('Component', function() {
         });
 
         it('should update name, selector and parent', function(){
-            component.set({$name: 'newName', $locator: '.newSelector', $parent: parent});
+            component.$$set({$name: 'newName', $locator: '.newSelector', $parent: parent});
             expect(component.$name).to.equal('newName');
             expect(component.$locator).to.equal('.newSelector');
             expect(component.$parent).to.equal(parent);
@@ -133,49 +133,16 @@ describe('Component', function() {
         });
 
         it('should update hierarchical information', function(){
-            component.set({$name: 'newName', $locator: '.newSelector', $parent: parent});
-            expect(component.getHierarchicalName()).to.equal('parent -> newName');
+            component.$$set({$name: 'newName', $locator: '.newSelector', $parent: parent});
+            var hierarchy = component.$$hierarchy().map(function (c) { return c.$name; }).join(' -> ');
+            expect(hierarchy).to.equal('parent -> newName');
         });
 
         it('should update hierarchical information in child Component', function(){
             var child = component.$$component({$name: 'child', $locator: '.child'});
-            component.set({$name: 'newName', $locator: '.newSelector', $parent: parent});
-            expect(child.getHierarchicalName()).to.equal('parent -> newName -> child');
-        });
-    });
-
-    describe('replicate method', function() {
-        it('should throw Error if name not provided as first positional argument', function() {
-            sinon.spy(component, 'replicate');
-            try { component.replicate(); } catch(error) {}
-            expect(component.replicate).to.have.thrown('Error');
-        });
-
-        it('should throw Error if Component has no parent', function() {
-            sinon.spy(component, 'replicate');
-            try { component.replicate('name'); } catch(error) {}
-            expect(component.replicate).to.have.thrown('Error');
-        });
-
-        it('should create a sibling Component', function() {
-            var child = component.$$component({$name: 'child', $locator: '.child'});
-            child.replicate({$name: 'sibling', $locator: '.sibling'});
-            expect(component).to.have.property('sibling');
-            expect(component.sibling).to.be.instanceof(Component);
-        });
-
-        it('should copy all elements of the replicated Component', function() {
-            var child = component.$$component({
-                $name: 'child', 
-                $locator: '.child',
-                $methods: {
-                    foo: function() { return 'bar'; }
-                }
-            });
-            child.$$component({$name: 'grand', $locator: '.gc'});
-            child.replicate({$name: 'sibling'});
-            component.sibling.$name = 'child';
-            expect(child.equals(component.sibling)).to.be.true;
+            component.$$set({$name: 'newName', $locator: '.newSelector', $parent: parent});
+            var hierarchy = child.$$hierarchy().map(function (c) { return c.$name; }).join(' -> ');
+            expect(hierarchy).to.equal('parent -> newName -> child');
         });
     });
 
