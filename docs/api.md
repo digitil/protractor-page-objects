@@ -1,5 +1,7 @@
 ## Classes
 <dl>
+<dt><a href="#PageObjects">PageObjects</a></dt>
+<dd></dd>
 <dt><a href="#Component">Component</a></dt>
 <dd><p>Component</p>
 </dd>
@@ -12,40 +14,20 @@
 </dl>
 ## Functions
 <dl>
-<dt><a href="#set">set(parent, name, locator, [parent])</a></dt>
+<dt><a href="#$$page">$$page(definition)</a></dt>
+<dd><p>Creates a new definition for a page in the application</p>
+</dd>
+<dt><a href="#$$hierarchy">$$hierarchy()</a> ⇒ <code>Array</code></dt>
+<dd><p>Travels up the component&#39;s tree and returns an array containing the
+component and all of its parents, in the order found.</p>
+</dd>
+<dt><a href="#set">set(definition)</a></dt>
 <dd><p>Sets the properties for a Component. Changes are recursed down to children.</p>
 </dd>
-<dt><a href="#addComponent">addComponent(name, locator)</a> ↩︎</dt>
-<dd></dd>
-<dt><a href="#getComponent">getComponent(name)</a> ↩︎</dt>
-<dd></dd>
-<dt><a href="#clone">clone()</a> ↩︎</dt>
-<dd><p>Returns a deep copy of the component. Warning: this method also copies any methods
-created with addMethod, which may still have reference to the original component.</p>
+<dt><a href="#equals">equals(a, b)</a> ⇒ <code>Boolean</code></dt>
+<dd><p>Determines whether two components are equal by deep comparison</p>
 </dd>
-<dt><a href="#copyComponent">copyComponent(component, name, locator)</a> ↩︎</dt>
-<dd><p>Makes a copy of a component, modifying the locator on it and its children.</p>
-</dd>
-<dt><a href="#component">component(arguments*)</a> ↩︎</dt>
-<dd><p>Overloaded method that allows add, get, or copy</p>
-</dd>
-<dt><a href="#addMethod">addMethod(name, method)</a> ↩︎</dt>
-<dd></dd>
-<dt><a href="#setMethodChain">setMethodChain()</a> ↩︎</dt>
-<dd><p>Inspects the method definitions for this component and its hierarchy
-and changes their context to this component&#39;s object</p>
-</dd>
-<dt><a href="#replicate">replicate(name, locator)</a> ↩︎</dt>
-<dd><p>Copies the definition of a component with its children. Slightly more
-convenient than copyComponent if copying to a sibling</p>
-</dd>
-<dt><a href="#addModel">addModel(name)</a> ↩︎</dt>
-<dd><p>Adds an ng-model by name to an input element</p>
-</dd>
-<dt><a href="#detach">detach()</a> ↩︎</dt>
-<dd><p>Removes the component and returns its parent</p>
-</dd>
-<dt><a href="#element">element()</a></dt>
+<dt><a href="#element">element()</a> ⇒ <code>ElementFinder</code></dt>
 <dd></dd>
 <dt><a href="#text">text()</a></dt>
 <dd><p>Retrieves the text from an element and passes the value to the provided callback function</p>
@@ -57,8 +39,8 @@ convenient than copyComponent if copying to a sibling</p>
 <dd><p>Retrieves or enters a value into an input field</p>
 </dd>
 <dt><a href="#isFullyDisplayed">isFullyDisplayed()</a></dt>
-<dd><p>Checks that all children are visible. For a component without children, use
-isVisible()</p>
+<dd><p>Checks that all children are visible.
+For a component without children, use isVisible()</p>
 </dd>
 <dt><a href="#containsText">containsText()</a></dt>
 <dd><p>Performs an angular expectation testing whether this element contains any text</p>
@@ -79,7 +61,7 @@ string or regular expression</p>
 <dt><a href="#click">click()</a></dt>
 <dd><p>Clicks on the element using the custom angular.anchor dsl</p>
 </dd>
-<dt><a href="#keypress">keypress()</a></dt>
+<dt><a href="#keypress">keypress(keyCode)</a></dt>
 <dd><p>Simulates keypress of given keycode</p>
 </dd>
 <dt><a href="#dragTo">dragTo(x, y)</a></dt>
@@ -114,44 +96,57 @@ function of that component type</p>
 <dt><a href="#nth">nth(number)</a></dt>
 <dd><p>Return the nth element matching this component&#39;s locator</p>
 </dd>
-<dt><a href="#goTo">goTo([pathOrRequest], [request])</a></dt>
+<dt><a href="#goTo">goTo([pathOrRequest])</a></dt>
 <dd><p>Use to navigate within the views for a Page.</p>
 </dd>
+<dt><a href="#goTo">goTo([pathOrRequest])</a></dt>
+<dd></dd>
+<dt><a href="#goTo">goTo([pathOrRequest], [request])</a></dt>
+<dd></dd>
 <dt><a href="#at">at()</a></dt>
-<dd><p>Performs an expectation on whether the browser is at the path for a Page</p>
+<dd><p>Performs an expectation on whether the browser is at the path defined for a Page</p>
 </dd>
-<dt><a href="#addView">addView(name, selector)</a> ⇒ <code><a href="#View">View</a></code></dt>
-<dd><p>Adds a View component to a Page</p>
+<dt><a href="#$$view">$$view(definition)</a> ⇒ <code><a href="#View">View</a></code></dt>
+<dd><p>Adds a View to a Page</p>
 </dd>
-<dt><a href="#getView">getView(name)</a> ⇒ <code><a href="#View">View</a></code></dt>
-<dd><p>Retrieves a View and throws an error if that View is not found</p>
-</dd>
-<dt><a href="#$$register">$$register(definition)</a></dt>
-<dd><p>The $$register method is used to create new page objects</p>
-</dd>
-<dt><a href="#set">set(name, locator)</a></dt>
-<dd><p>Set the name and locator of this view. Changes will recurse down to children</p>
-</dd>
-<dt><a href="#addPath">addPath(path)</a> ⇒ <code><a href="#View">View</a></code></dt>
-<dd><p>Adds a path to this View with path parameter having a colon prefix.
-Paths should be taken directly from the application routes!</p>
+<dt><a href="#$$component">$$component(definition)</a> ⇒ <code><a href="#Component">Component</a></code></dt>
+<dd><p>Adds a Component to the page</p>
 </dd>
 <dt><a href="#goTo">goTo(routeParams, queryParams)</a></dt>
 <dd><p>Navigates to the path for this View given the appropriate route parameters.
 Query params may also be added.</p>
 </dd>
 <dt><a href="#at">at()</a></dt>
-<dd><p>Performs an expectation testing that the current route matches the path set for
-this View</p>
-</dd>
-<dt><a href="#objectToQueryStr">objectToQueryStr(object)</a> ⇒ <code>String</code></dt>
-<dd></dd>
-<dt><a href="#joinQueryStrings">joinQueryStrings(qs1, qs2)</a> ⇒ <code>String</code></dt>
-<dd></dd>
-<dt><a href="#changeMethodContext">changeMethodContext(context, methodName, method)</a></dt>
-<dd><p>Does not affect original function</p>
+<dd><p>Performs an expectation testing that the current route matches the path set for this View</p>
 </dd>
 </dl>
+<a name="PageObjects"></a>
+## PageObjects
+**Kind**: global class  
+<a name="new_PageObjects_new"></a>
+### new PageObjects(pages)
+Defines a new set of application pages.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| pages | <code>[Array.&lt;PageDefinition&gt;](#Page..PageDefinition)</code> | definitions for the pages to be added |
+
+**Example**  
+```js
+<caption>Pass in a variable number of pages</caption>
+var app = new PageObjects(login, home, settings);
+```
+**Example**  
+```js
+<caption>Pass in an array of pages</caption>
+var app = new PageObjects([login, home, settings]);
+```
+**Example**  
+```js
+<caption>Or mix the two</caption>
+var app = new PageObjects(login, [home], settings);
+```
 <a name="Component"></a>
 ## Component
 Component
@@ -159,33 +154,67 @@ Component
 **Kind**: global class  
 
 * [Component](#Component)
-  * [new Component(name, locator, parent)](#new_Component_new)
-  * [.mixin([Constructor])](#Component.mixin)
+  * [new Component(definition)](#new_Component_new)
+  * _instance_
+    * [.$$component(component, [definition])](#Component+$$component) ⇒ <code>[Component](#Component)</code>
+  * _static_
+    * [.mixin(inheritor)](#Component.mixin)
+  * _inner_
+    * [~ComponentDefinition](#Component..ComponentDefinition) : <code>Object</code>
 
 <a name="new_Component_new"></a>
-### new Component(name, locator, parent)
+### new Component(definition)
 A Component can be defined application-wide or be a part of a page.
-You can define elements and methods on a Component. If no arguments
-are passed to the constructor, an empty Component instance is returned
-to faciliate cloning
+You can define elements and methods on a Component.
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>String</code> |  |
-| locator | <code>Object</code> | the locator matching this element from its parent NOT the document root |
-| parent | <code>Object</code> | can be null |
+| Param | Type |
+| --- | --- |
+| definition | <code>[ComponentDefinition](#Component..ComponentDefinition)</code> | 
+
+<a name="Component+$$component"></a>
+### component.$$component(component, [definition]) ⇒ <code>[Component](#Component)</code>
+Copy an existing component onto this component.
+The locator for the copied component and its children will become relative to this component.
+Warning: this method also copies any methods, which may still have reference to the original component.
+
+**Kind**: instance method of <code>[Component](#Component)</code>  
+**Returns**: <code>[Component](#Component)</code> - A deep copy of the component  
+**Throws**:
+
+- <code>Error</code> If first argument is not a Component
+
+
+| Param | Type |
+| --- | --- |
+| component | <code>[Component](#Component)</code> | 
+| [definition] | <code>[ComponentDefinition](#Component..ComponentDefinition)</code> | 
 
 <a name="Component.mixin"></a>
-### Component.mixin([Constructor])
+### Component.mixin(inheritor)
 Provides access to methods that are appropriate for supporting
 Component in other classes such as View
 
 **Kind**: static method of <code>[Component](#Component)</code>  
 
-| Param | Description |
+| Param | Type |
 | --- | --- |
-| [Constructor] | inheritor |
+| inheritor | <code>Constructor</code> | 
+
+<a name="Component..ComponentDefinition"></a>
+### Component~ComponentDefinition : <code>Object</code>
+The definition object for a Component
+
+**Kind**: inner typedef of <code>[Component](#Component)</code>  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| $name | <code>String</code> | the name of the component |
+| $locator | <code>String</code> | the locator for this component (can be a css selector or a [ProtractorBy](http://www.protractortest.org/#/api?view=ProtractorBy) locator) |
+| $parent | <code>[Component](#Component)</code> &#124; <code>[View](#View)</code> &#124; <code>[Page](#Page)</code> | the parent component for this component. $locator should be relative to this parent. |
+| $methods | <code>Object.&lt;String, function()&gt;</code> | a map of functions to be added as instance methods to this component |
+| $components | <code>Array.&lt;ComponentDefinition&gt;</code> | sub-components to add to this Component |
 
 <a name="Page"></a>
 ## Page
@@ -194,17 +223,17 @@ Page
 **Kind**: global class  
 
 * [Page](#Page)
-  * [new Page(options)](#new_Page_new)
+  * [new Page(definition)](#new_Page_new)
   * [~PageDefinition](#Page..PageDefinition) : <code>Object</code>
 
 <a name="new_Page_new"></a>
-### new Page(options)
+### new Page(definition)
 A Page represents one of the main application pages.
 
 
 | Param | Type |
 | --- | --- |
-| options | <code>PageDefinition</code> | 
+| definition | <code>[PageDefinition](#Page..PageDefinition)</code> | 
 
 <a name="Page..PageDefinition"></a>
 ### Page~PageDefinition : <code>Object</code>
@@ -217,166 +246,86 @@ The definition object for a Page
 | --- | --- | --- |
 | $name | <code>String</code> | the name of the page |
 | $path | <code>String</code> | the relative path to this page |
-| $params | <code>Object</code> | a set of query params to set when navigating to this page |
+| $params | <code>Object</code> | a map of query params to set when navigating to this page |
+| $components | <code>[Array.&lt;ComponentDefinition&gt;](#Component..ComponentDefinition)</code> | components to add to this Page |
 
 <a name="View"></a>
 ## View
 View
 
 **Kind**: global class  
+
+* [View](#View)
+  * [new View(definition)](#new_View_new)
+  * [~ViewDefinition](#View..ViewDefinition) : <code>Object</code>
+
 <a name="new_View_new"></a>
-### new View(name, locator)
+### new View(definition)
 A View extends a Component
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>String</code> |  |
-| locator | <code>String</code> | TODO Views shouldn't require a locator |
+| definition | <code>[ViewDefinition](#View..ViewDefinition)</code> | definition for the view to be created |
 
+<a name="View..ViewDefinition"></a>
+### View~ViewDefinition : <code>Object</code>
+The definition object for a View
+
+**Kind**: inner typedef of <code>[View](#View)</code>  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| $name | <code>String</code> | the name of the page |
+| $locator | <code>String</code> | the locator for this page (can be a css selector or a [ProtractorBy](http://www.protractortest.org/#/api?view=ProtractorBy) locator) |
+| $components | <code>[Array.&lt;ComponentDefinition&gt;](#Component..ComponentDefinition)</code> | components to add to this View |
+
+<a name="$$page"></a>
+## $$page(definition)
+Creates a new definition for a page in the application
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| definition | <code>[PageDefinition](#Page..PageDefinition)</code> | the definition for the new page |
+
+<a name="$$hierarchy"></a>
+## $$hierarchy() ⇒ <code>Array</code>
+Travels up the component's tree and returns an array containing the
+component and all of its parents, in the order found.
+
+**Kind**: global function  
 <a name="set"></a>
-## set(parent, name, locator, [parent])
+## set(definition)
 Sets the properties for a Component. Changes are recursed down to children.
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| parent |  | 
-| name | <code>String</code> | 
-| locator | <code>Object</code> | 
-| [parent] | <code>[Component](#Component)</code> | 
+| definition | <code>[ComponentDefinition](#Component..ComponentDefinition)</code> | 
 
 **Example**  
 ```js
-<pre>
-
-     component.set('list', '.itemList', null);
-</pre>
+component.set({$name: 'list', $locator: '.itemList', $parent: null});
 ```
-<a name="addComponent"></a>
-## addComponent(name, locator) ↩︎
+<a name="equals"></a>
+## equals(a, b) ⇒ <code>Boolean</code>
+Determines whether two components are equal by deep comparison
+
 **Kind**: global function  
-**Chainable**  
 
 | Param | Type |
 | --- | --- |
-| name | <code>String</code> | 
-| locator | <code>Object</code> | 
+| a | <code>[Component](#Component)</code> | 
+| b | <code>[Component](#Component)</code> | 
 
-<a name="getComponent"></a>
-## getComponent(name) ↩︎
-**Kind**: global function  
-**Chainable**  
-
-| Param | Type |
-| --- | --- |
-| name | <code>String</code> | 
-
-<a name="clone"></a>
-## clone() ↩︎
-Returns a deep copy of the component. Warning: this method also copies any methods
-created with addMethod, which may still have reference to the original component.
-
-**Kind**: global function  
-**Chainable**  
-<a name="copyComponent"></a>
-## copyComponent(component, name, locator) ↩︎
-Makes a copy of a component, modifying the locator on it and its children.
-
-**Kind**: global function  
-**Chainable**  
-
-| Param | Type |
-| --- | --- |
-| component | <code>[Component](#Component)</code> | 
-| name | <code>String</code> | 
-| locator | <code>Object</code> | 
-
-<a name="component"></a>
-## component(arguments*) ↩︎
-Overloaded method that allows add, get, or copy
-
-**Kind**: global function  
-**Chainable**  
-
-| Param | Type |
-| --- | --- |
-| arguments* | <code>mixed</code> | 
-
-<a name="addMethod"></a>
-## addMethod(name, method) ↩︎
-**Kind**: global function  
-**Chainable**  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>String</code> |  |
-| method | <code>function</code> | accesses the parent instance using 'this' |
-
-**Example**  
-```js
-<pre>
-
-     component.addMethod('clickElt', function() {
-         this.childComponent.click();
-     });
-
-     component.clickElt();
-</pre>
-```
-<a name="setMethodChain"></a>
-## setMethodChain() ↩︎
-Inspects the method definitions for this component and its hierarchy
-and changes their context to this component's object
-
-**Kind**: global function  
-**Chainable**  
-<a name="replicate"></a>
-## replicate(name, locator) ↩︎
-Copies the definition of a component with its children. Slightly more
-convenient than copyComponent if copying to a sibling
-
-**Kind**: global function  
-**Chainable**  
-
-| Param | Type |
-| --- | --- |
-| name | <code>String</code> | 
-| locator | <code>Object</code> | 
-
-**Example**  
-```js
-<pre>
-
-     myComponent.component('box', '#box-1').parent()
-         .component(myComponent.component('box'), 'box2', '#box-2');
-
-     // is equivalent to
-     myComponent.component('box', '#box-1')
-         .replicate('box2', '#box-2');
-</pre>
-```
-<a name="addModel"></a>
-## addModel(name) ↩︎
-Adds an ng-model by name to an input element
-
-**Kind**: global function  
-**Chainable**  
-
-| Param | Type |
-| --- | --- |
-| name | <code>String</code> | 
-
-<a name="detach"></a>
-## detach() ↩︎
-Removes the component and returns its parent
-
-**Kind**: global function  
-**Chainable**  
 <a name="element"></a>
-## element()
+## element() ⇒ <code>ElementFinder</code>
 **Kind**: global function  
+**Returns**: <code>ElementFinder</code> - Returns the {#link http://www.protractortest.org/#/api?view=ElementFinder|ElementFinder} for this component  
 <a name="text"></a>
 ## text()
 Retrieves the text from an element and passes the value to the provided callback function
@@ -384,10 +333,7 @@ Retrieves the text from an element and passes the value to the provided callback
 **Kind**: global function  
 **Example**  
 ```js
-<pre>
-
-     expect(myElement.text()).toMatch(/hello world/ig);
-</pre>
+expect(component.text()).toMatch(/hello world/ig);
 ```
 <a name="enter"></a>
 ## enter(value)
@@ -411,8 +357,8 @@ Retrieves or enters a value into an input field
 
 <a name="isFullyDisplayed"></a>
 ## isFullyDisplayed()
-Checks that all children are visible. For a component without children, use
-isVisible()
+Checks that all children are visible.
+For a component without children, use isVisible()
 
 **Kind**: global function  
 <a name="containsText"></a>
@@ -438,10 +384,7 @@ string or regular expression
 
 **Example**  
 ```js
-<pre>
-
-     myElement.matches(/hello world/);
-</pre>
+component.matches(/hello world/);
 ```
 <a name="isVisible"></a>
 ## isVisible()
@@ -459,10 +402,15 @@ Clicks on the element using the custom angular.anchor dsl
 
 **Kind**: global function  
 <a name="keypress"></a>
-## keypress()
+## keypress(keyCode)
 Simulates keypress of given keycode
 
 **Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| keyCode | <code>Number</code> | 
+
 <a name="dragTo"></a>
 ## dragTo(x, y)
 Simulates browser drag and drop
@@ -510,14 +458,12 @@ Tests this component for having the '_blank' href target
 <a name="expectCount"></a>
 ## expectCount() ⇒ <code>Object</code>
 **Kind**: global function  
-**Returns**: <code>Object</code> - greaterThan, lessThan, toBe  
 **Example**  
 ```js
 <pre>
-
-     component.expectCount().greaterThan(3);
-     component.expectCount().lessThan(7);
-     component.expectCount().toBe(2);
+component.expectCount().greaterThan(3);
+component.expectCount().lessThan(7);
+component.expectCount().toBe(2);
 </pre>
 ```
 <a name="all"></a>
@@ -534,10 +480,7 @@ function of that component type
 
 **Example**  
 ```js
-<pre>
-
-     component.all(function(element) { element.click(); });
-</pre>
+component.all(function(element) { element.click(); });
 ```
 <a name="nth"></a>
 ## nth(number)
@@ -551,120 +494,79 @@ Return the nth element matching this component's locator
 
 **Example**  
 ```js
-<pre>
-
-     component.nth(3).isDisplayed();
-</pre>
+component.nth(3).isDisplayed();
 ```
 <a name="goTo"></a>
-## goTo([pathOrRequest], [request])
+## goTo([pathOrRequest])
 Use to navigate within the views for a Page.
 
 **Kind**: global function  
-**Uses**: browser  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [pathOrRequest] | <code>String</code> &#124; <code>Object</code> |  |
-| [request] | <code>String</code> | if provided will also to the path with the specified request |
+| [pathOrRequest] | <code>String</code> | the path to navigate to relative to this page |
 
 **Example**  
 ```js
-<pre>
-
-     ClassesPage.goTo("create");
-</pre>
+// /todo/create
+Todo.goTo("create");
+  
+ 
 ```
+<a name="goTo"></a>
+## goTo([pathOrRequest])
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [pathOrRequest] | <code>Object</code> | a map of params to add to path as a query string |
+
 **Example**  
 ```js
-<pre>
+// /todo?priority=high
+Todo.goTo({priority: 'high'});
 
-     // go to the data page with no options
-     compass.navigateTo(page.getPathTo());
+ 
+```
+<a name="goTo"></a>
+## goTo([pathOrRequest], [request])
+**Kind**: global function  
 
-     // go to the data page with options, e.g. http://localhost/data/page?state=zero%20classes
-     compass.navigateTo(page.getPathTo({state: "zero classes"}));
+| Param | Type | Description |
+| --- | --- | --- |
+| [pathOrRequest] | <code>String</code> | the path to navigate to relative to this page |
+| [request] | <code>Object</code> | a map of params to add to path as a query string |
 
-     // go to a view, specifying options, e.g. http://localhost/data/page/reports/overview?state=zero_classes
-     compass.navigateTo(page.getPathTo("reports/overview", {state: "zero_classes"}));
-
-</pre>
+**Example**  
+```js
+//todo/edit?id=foo
+Todo.goTo("edit", {id: 'foo'});
 ```
 <a name="at"></a>
 ## at()
-Performs an expectation on whether the browser is at the path for a Page
+Performs an expectation on whether the browser is at the path defined for a Page
 
 **Kind**: global function  
-<a name="addView"></a>
-## addView(name, selector) ⇒ <code>[View](#View)</code>
-Adds a View component to a Page
-
-**Kind**: global function  
-**Chainable**  
-
-| Param | Type |
-| --- | --- |
-| name | <code>String</code> | 
-| selector | <code>String</code> | 
-
-<a name="getView"></a>
-## getView(name) ⇒ <code>[View](#View)</code>
-Retrieves a View and throws an error if that View is not found
-
-**Kind**: global function  
-**Chainable**  
-
-| Param | Type |
-| --- | --- |
-| name | <code>String</code> | 
-
-<a name="$$register"></a>
-## $$register(definition)
-The $$register method is used to create new page objects
+<a name="$$view"></a>
+## $$view(definition) ⇒ <code>[View](#View)</code>
+Adds a View to a Page
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| definition | <code>PageDefinition</code> | 
+| definition | <code>[ViewDefinition](#View..ViewDefinition)</code> | 
 
-<a name="set"></a>
-## set(name, locator)
-Set the name and locator of this view. Changes will recurse down to children
+<a name="$$component"></a>
+## $$component(definition) ⇒ <code>[Component](#Component)</code>
+Adds a Component to the page
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| name | <code>String</code> | 
-| locator | <code>String</code> | 
+| definition | <code>[ComponentDefinition](#Component..ComponentDefinition)</code> | 
 
-**Example**  
-```js
-<pre>
-
-     app.getPage('Page1').getView('MyView').set('YourView', '#second-view');
-</pre>
-```
-<a name="addPath"></a>
-## addPath(path) ⇒ <code>[View](#View)</code>
-Adds a path to this View with path parameter having a colon prefix.
-Paths should be taken directly from the application routes!
-
-**Kind**: global function  
-**Chainable**  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| path | <code>String</code> | a parameterized form of this View's url |
-
-**Example**  
-```js
-<pre>
-
-     Classes.getView('MyView').addPath("classes/:classId/assignments");
-</pre>
-```
 <a name="goTo"></a>
 ## goTo(routeParams, queryParams)
 Navigates to the path for this View given the appropriate route parameters.
@@ -672,61 +574,29 @@ Query params may also be added.
 
 **Kind**: global function  
 
-| Param | Type |
-| --- | --- |
-| routeParams | <code>Object</code> | 
-| queryParams | <code>Object</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| routeParams | <code>Object</code> | a map of replacements for path parameters |
+| queryParams | <code>Object</code> | a map of url query parameters |
 
 **Example**  
 ```js
 <pre>
+view.$path = 'http://localhost/myview/:id/posts'
 
-     // e.g. http://localhost/myview/my-101-id/posts
-     compass.navigateTo(view.getPathTo({id: 'my-101-id'}));
+// http://localhost/myview/my-101-id/posts
+view.goTo({id: 'my-101-id'});
 
-     // e.g. http://localhost/myview/my-101-id/posts?state=no_posts
-     compass.navigateTo(view.getPathTo({id: 'my-101-id'}, {state: 'no_posts'));
+// http://localhost/myview/my-101-id/posts?state=no_posts
+view.goTo({id: 'my-101-id'}, {state: 'no_posts');
 </pre>
 ```
 <a name="at"></a>
 ## at()
-Performs an expectation testing that the current route matches the path set for
-this View
+Performs an expectation testing that the current route matches the path set for this View
 
 **Kind**: global function  
 **Example**  
 ```js
-<pre>
-
-     it('should do something', function(){ myView.at(); });
-</pre>
+it('should do something', function(){ myView.at(); });
 ```
-<a name="objectToQueryStr"></a>
-## objectToQueryStr(object) ⇒ <code>String</code>
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| object | <code>Object</code> | 
-
-<a name="joinQueryStrings"></a>
-## joinQueryStrings(qs1, qs2) ⇒ <code>String</code>
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| qs1 | <code>String</code> | 
-| qs2 | <code>String</code> | 
-
-<a name="changeMethodContext"></a>
-## changeMethodContext(context, methodName, method)
-Does not affect original function
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| context | <code>function</code> &#124; <code>Object</code> | 
-| methodName | <code>String</code> | 
-| method | <code>function</code> | 
-

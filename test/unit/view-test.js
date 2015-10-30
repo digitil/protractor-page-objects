@@ -58,7 +58,7 @@ describe('View', function() {
         });
 
         it('should ignore unrecognized route params', function() {
-            view.goTo({parameter: 'home', foo: 'bar'})
+            view.goTo({parameter: 'home', foo: 'bar'});
             expect(browser.get).to.have.been.calledWith('sample/home/path');
         });
 
