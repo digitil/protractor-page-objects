@@ -1,0 +1,7 @@
+{
+    "globals": {
+        "expect": false,
+        "element": false,
+        "by": false
+    }
+}

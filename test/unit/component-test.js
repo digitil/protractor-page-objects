@@ -14,6 +14,17 @@ describe('Component', function() {
             expect(component.$name).to.equal('name');
             expect(component.$locator).to.equal('.selector');
         });
+
+        it('should create child Components for any defined in ComponentDefinition', function() {
+            component = new Component({
+                $components: [
+                    { $name: 'toolbox' },
+                    { $name: 'header' }
+                ]
+            });
+            expect(component.toolbox).to.be.an.instanceof(Component);
+            expect(component.header).to.be.an.instanceof(Component);
+        });
     });
 
     describe('mixin class method', function () {
@@ -151,6 +162,101 @@ describe('Component', function() {
             var child = component.$$component({$name: 'hello', $locator: '.world'});
             expect(child.$parent).to.equal(component);
             expect(child.$$parent()).to.equal(component);
+        });
+    });
+
+    describe('equals method', function() {
+        it('should return false if either argument is not a Component', function() {
+            var a = new Component({$name: 'hello'});
+            var b = {$name: 'hello'};
+            var c = new Component({$name: 'hello'});
+            expect(Component.equals(a, b)).to.be.false;
+            expect(Component.equals(a, c)).to.be.true;
+        });
+
+        it('should return false if there are missing subcomponents', function() {
+            var a = new Component({
+                $components: [
+                    {$name: 'hello'},
+                    {$name: 'world'}
+                ]
+            });
+            var b = new Component({
+                $components: [
+                    {$name: 'hello'}
+                ]
+            });
+            var c = new Component({
+                $components: [
+                    {$name: 'hello'},
+                    {$name: 'world'}
+                ]
+            });
+            var d = new Component({});
+            expect(Component.equals(a, b)).to.be.false;
+            expect(Component.equals(a, d)).to.be.false;
+            expect(Component.equals(a, c)).to.be.true;
+        });
+
+        it('should return false if subcomponents are not equal', function() {
+            var a = new Component({
+                $components: [
+                    {$name: 'hello', $locator: '.world'}
+                ]
+            });
+            var b = new Component({
+                $components: [
+                    {$name: 'hello', $locator: '#world'}
+                ]
+            });
+            expect(Component.equals(a, b)).to.be.false;
+        });
+
+        it('should return false if there are missing methods', function() {
+            var a = new Component({
+                $methods: {
+                    hello: function() { return 'world'; }
+                }
+            });
+            var b = new Component({
+                $methods: {
+                    hello: function() { return 'world'; },
+                    foo: function(bar) { return bar; }
+                }
+            });
+            var c = new Component({
+                $methods: {
+                    hello: function() { return 'world'; },
+                    foo: function(bar) { return bar; }
+                }
+            });
+            expect(Component.equals(a, b)).to.be.false;
+            expect(Component.equals(b, c)).to.be.true;
+        });
+
+        it('should return false if methods are defined in one component and not the other', function() {
+            var a = new Component({
+                $methods: {
+                    hello: function() { return 'world'; }
+                }
+            });
+            var b = new Component({});
+            expect(Component.equals(a, b)).to.be.false;
+            expect(Component.equals(b, a)).to.be.false;
+        });
+
+        it('should return false if methods are not equivalent', function() {
+            var a = new Component({
+                $methods: {
+                    hello: function() { return 'world'; }
+                }
+            });
+            var b = new Component({
+                $methods: {
+                    hello: function(world) { return world; }
+                }
+            });
+            expect(Component.equals(a, b)).to.be.false;
         });
     });
 });

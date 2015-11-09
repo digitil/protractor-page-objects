@@ -7,18 +7,46 @@ var Component = require('./deps').Component;
 describe('Page', function() {
     var page;
 
-    describe('constructor', function () {
-        it('should set properties according to the PageDefinition', function () {
+    describe('constructor', function() {
+        it('should set properties according to the PageDefinition', function() {
             page = new Page({
                 $path: 'home/page'
             });
             expect(page.$path).to.equal('home/page');
         });
+
+        it('should create Views for any defined in the PageDefinition', function() {
+            page = new Page({
+                $views: [
+                    {
+                        $name: 'UserSettings'
+                    },
+                    {
+                        $name: 'AppSettings'
+                    }
+                ]
+            });
+            expect(page.UserSettings).to.be.an.instanceof(View);
+            expect(page.AppSettings).to.be.an.instanceof(View);
+        });
+
+        it('should create Components on the Page for any defined in the PageDefinition', function() {
+            page = new Page({
+                $components: [
+                    {
+                        $name: 'Modal'
+                    },
+                    {
+                        $name: 'Panel'
+                    }
+                ]
+            });
+            expect(page.Modal).to.be.an.instanceof(Component);
+            expect(page.Panel).to.be.an.instanceof(Component);
+        });
     });
 
     describe('goTo method', function() {
-        var path;
-
         beforeEach(function() {
             global.browser = { get: sinon.spy() };
             page = new Page({$path: 'home'});
@@ -98,4 +126,5 @@ describe('Page', function() {
             expect(component).to.equal(page.componentName);
         });
     });
+
 });

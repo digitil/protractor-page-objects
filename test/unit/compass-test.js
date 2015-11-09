@@ -1,4 +1,3 @@
-var sinon = require('./deps').sinon;
 var expect = require('./deps').expect;
 var PageObjects = require('./deps').PageObjects;
 var Page = require('./deps').Page;
