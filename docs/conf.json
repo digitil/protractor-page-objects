@@ -1,0 +1,34 @@
+{
+    "tags": {
+        "allowUnknownTags": false
+    },
+    "source": {
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_",
+        "include": [
+            "lib/typedefs/",
+            "lib/PageObjects.js",
+            "lib/page/",
+            "lib/view/",
+            "lib/component/"
+        ]
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "markdown": {
+        "tags": [
+            "example"
+        ],
+        "hardwrap": true
+    },
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": false,
+        "default": {
+            "outputSourceFiles": true
+        }
+    },
+    "encoding": "utf8",
+    "recurse": true
+}
