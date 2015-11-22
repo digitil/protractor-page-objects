@@ -8,9 +8,9 @@ describe('PageObjects', function () {
     describe('constructor', function () {
         it('should create Page objects from an array of PageDefinition objects', function () {
             app = new PageObjects([
-                {$name: 'pageOne'},
-                {$name: 'pageTwo'},
-                {$name: 'pageThree'}
+                {name: 'pageOne'},
+                {name: 'pageTwo'},
+                {name: 'pageThree'}
             ]);
 
             expect(app).to.have.property('pageOne');
@@ -19,7 +19,11 @@ describe('PageObjects', function () {
         });
 
         it('should create Page objects from PageDefinition arguments', function () {
-            app = new PageObjects({$name: 'pageOne'}, {$name: 'pageTwo'}, {$name: 'pageThree'});
+            app = new PageObjects(
+                {name: 'pageOne'},
+                {name: 'pageTwo'},
+                {name: 'pageThree'}
+            );
 
             expect(app).to.have.property('pageOne');
             expect(app).to.have.property('pageTwo');
@@ -33,8 +37,8 @@ describe('PageObjects', function () {
         });
         
         it('should create a new Page', function () {
-            app.$$page({
-                $name: 'Home'
+            app.$page({
+                name: 'Home'
             });
 
             expect(app).to.have.property('Home');
