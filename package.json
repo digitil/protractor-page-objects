@@ -27,7 +27,8 @@
     "gulp-util": "~3.0.6",
     "gulp-jsdoc-to-markdown": "~1.1.1",
     "gulp-jscs": "~3.0.1",
-    "jscs-jsdoc": "~1.2.0"
+    "jscs-jsdoc": "~1.2.0",
+    "gulp-live-server": "0.0.29"
   },
   "scripts": {
     "test": "gulp test"
