@@ -1,4 +1,4 @@
-# protractor-pageobjects
+# protractor-page-objects
 
 A page-object factory for [Protractor][].
 
@@ -10,7 +10,7 @@ For more motivation on using page objects, there's a great, short article by Mar
 
 # Getting started
 
-    npm install protractor-pageobjects --save-dev
+    npm install protractor-page-objects --save
 
 The API documentation can be found at [docs/api.md](docs/api.md).
 
