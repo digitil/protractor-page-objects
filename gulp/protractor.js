@@ -5,7 +5,7 @@ var protractor = require('gulp-angular-protractor');
 var server;
 
 gulp.task('serve-testapp', function() {
-    server = gls([gls.script, 'testapp', 8888], undefined, false);
+    server = gls([gls.script, 'testapp', 8881], undefined, false);
     server.start();
 });
 

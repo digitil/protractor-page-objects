@@ -3,3 +3,5 @@ results.xml
 .coverdata/
 .coverrun
 reports/
+docs/protractor-page-objects/
+.publish/
