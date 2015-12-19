@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: component/component.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: component/component.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*global setMethods, getComponent, copyComponent, addComponent */
+'use strict';
+
+module.exports = Component;
+var extend = require('extend');
+require('./methods').static(global);
+
+/**
+ * A Component can be defined application-wide or be a part of a page.
+ * You can define elements and methods on a Component.
+ *
+ * @class Component
+ * @constructor
+ * @mixes ComponentTree
+ * @param {Component~ComponentDefinition} definition
+ */
+function Component(definition) {
+    var self = this;
+
+    this.$ = definition;
+
+    if ('methods' in definition) {
+        setMethods.call(this);
+    }
+
+    if ('components' in definition) {
+        definition.components.forEach(function(componentDefinition) {
+            self.$component(componentDefinition);
+        });
+    }
+}
+
+/**
+ * Provides methods that are appropriate for supporting Component
+ * 
+ * @private
+ * @mixin
+ */
+var ComponentTree = {
+    $parent: function() {
+        return this.$.parent;
+    },
+
+    /**
+     * Travels up the Component tree and returns an array containing the
+     * Component and all of its parents, in the order found.
+     *
+     * @return {Array.&lt;Component|View|Page>}
+     */
+    $hierarchy: function() {
+        var hierarchy = [];
+        var node = this;
+
+        while (node) {
+            hierarchy.unshift(node);
+            node = node.$.parent;
+        }
+
+        return hierarchy;
+    },
+
+    /**
+     * Add a new component to this component
+     *
+     * @param {Component~ComponentDefinition} definition
+     * 
+     *//**
+     *
+     * Get a previously defined component
+     *
+     * @param {String} name
+     * @returns {Component}
+     * @throws {ReferenceError} If the requested component doesn't exist
+     * 
+     *//**
+     *
+     * Copy an existing component onto this component.
+     * The locator for the copied component and its children will become relative to this component.
+     * Warning: this method also copies any methods, which may still have reference to the original component.
+     * 
+     * @param {Component} component
+     * @param {Component~ComponentDefinition} [definition]
+     * @returns {Component} A deep copy of the component
+     * @throws {Error} If first argument is not a Component
+     */
+    $component: function(component) {
+        if (typeof component === 'string') {
+            return getComponent.apply(this, arguments);
+        }
+
+        if (component instanceof Component) {
+            return copyComponent.apply(this, arguments);
+        }
+
+        return addComponent.apply(this, arguments);
+    }
+};
+
+
+/**
+ * Sets the properties for a Component. Changes are recursed down to children.
+ *
+ * @method set
+ * @memberof Component.prototype
+ * @param {Component~ComponentDefinition} definition
+ *
+ * @example
+ * component.set({name: 'list', locator: '.itemList', parent: null});
+ */
+Component.prototype.$set = function(definition) {
+    definition = extend({}, this.$, definition);
+    this.constructor(definition);
+};
+
+/**
+ * Provides access to methods that are appropriate for supporting
+ * Component in other classes such as View
+ *
+ * @param {Constructor} inheritor
+ */
+Component.mixin = function(inheritor) {
+    var methods = Object.keys(ComponentTree);
+
+    methods.forEach(function(method) {
+        inheritor.prototype[method] = ComponentTree[method];
+    });
+};
+
+/**
+ * Determines whether two components are equal by deep comparison
+ *
+ * @method equals
+ * @memberof Component
+ * @param  {Component} a
+ * @param  {Component} b
+ * @return {Boolean}
+ */
+Component.equals = function(a, b) {
+    if (!(a instanceof Component &amp;&amp; b instanceof Component)) {
+        return false;
+    }
+    
+    if (!isEquivalentComponents(a, b)) {
+        return false;
+    }
+
+    if (!isEquivalentMethods(a.$.methods, b.$.methods)) {
+        return false;
+    }
+
+    return a.$.locator === b.$.locator;
+};
+
+/**
+ * @ignore
+ * @param  {Component}  a 
+ * @param  {Component}  b 
+ * @return {Boolean}
+ */
+function isEquivalentComponents(a, b) {
+    var name;
+    
+    if (a.$.components &amp;&amp; b.$.components) {
+        if (a.$.components.length !== b.$.components.length) {
+            return false;
+        }
+
+        for (var i = a.$.components.length - 1; i >= 0; i--) {
+            name = a.$.components[i].name;
+
+            if (!Component.equals(a[name], b[name])) {
+                return false;
+            }
+        }
+    } else if (a.$.components || b.$.components) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * @ignore
+ * @param  {Object.&lt;String,Function>}  aMethods
+ * @param  {Object.&lt;String,Function>}  bMethods
+ * @return {Boolean}
+ */
+function isEquivalentMethods(aMethods, bMethods) {
+    if ((aMethods || bMethods) &amp;&amp; !(aMethods &amp;&amp; bMethods)) {
+        return false;
+    } else if (!(aMethods || bMethods)) {
+        return true;
+    }
+
+    var aNames = Object.keys(aMethods);
+    var bNames = Object.keys(bMethods);
+
+    if (aNames.length !== bNames.length) {
+        return false;
+    }
+
+    for (var i = aNames.length - 1, name; i >= 0; i--) {
+        name = aNames[i];
+        if (aMethods[name].toString() !== bMethods[name].toString()) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+Component.mixin(Component);
+extend(Component.prototype, require('./dsl'));
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Component.html">Component</a></li><li><a href="Page.html">Page</a></li><li><a href="PageObjects.html">PageObjects</a></li><li><a href="View.html">View</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-build-page.html">Build a page object</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat Dec 19 2015 16:52:53 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
