@@ -1,6 +1,6 @@
 install:
-	- "npm install"
+    - "npm install"
 merge:
-	script:
-		- "npm test"
-	squash: true
+    script:
+        - "npm test"
+    squash: true
