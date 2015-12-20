@@ -9,13 +9,7 @@ gulp.task('serve-testapp', function() {
     server.start();
 });
 
-gulp.task('protractor', ['serve-testapp'], function () {
-    var config = {
-            configFile: 'test/integration/conf.js',
-            autoStartStopServer: true,
-            debug: true
-        };
-
+function runProtractor(config) {
     return gulp.src(['test/integration/*.spec.js'])
         .pipe(protractor(config))
         .on('end', function () {
@@ -25,4 +19,24 @@ gulp.task('protractor', ['serve-testapp'], function () {
             server.stop();
             throw e;
         });
+}
+
+gulp.task('protractor', ['serve-testapp'], function () {
+    var config = {
+            configFile: 'test/integration/conf.js',
+            autoStartStopServer: true,
+            debug: true
+        };
+
+    return runProtractor(config);
+});
+
+gulp.task('protractor-ci', ['serve-testapp'], function () {
+    var config = {
+            configFile: 'test/integration/conf.ci.js',
+            autoStartStopServer: true,
+            debug: true
+        };
+
+    return runProtractor(config);
 });

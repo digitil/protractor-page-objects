@@ -6,6 +6,10 @@ gulp.task('lint', ['jshint', 'jscs']);
 gulp.task('test', ['mocha', 'protractor']);
 gulp.task('default', ['lint', 'test']);
 
+gulp.task('ci', function() {
+	sequence('lint', 'mocha-coverage', 'protractor-ci');
+});
+
 gulp.task('publish', function() {
 	sequence('default', 'jsdoc', 'gh-pages');
 });
