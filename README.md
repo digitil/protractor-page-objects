@@ -1,8 +1,10 @@
 # protractor-page-objects
 
+[![Build Status](https://travis-ci.org/digitil/protractor-page-objects.svg)](https://travis-ci.org/digitil/protractor-page-objects)
+
 A page-object factory for [Protractor][].
 
-Using page objects makes it easier to interact with elements on the page. Rather than redefine actions or components in the app, use page objects to encapsulate that information, "DRY" up test code, and make scenarios easier to read and maintain. 
+Using page objects makes it easier to interact with elements on the page. Rather than redefine actions or components in the app, use page objects to encapsulate that information, "DRY" up test code, and make scenarios easier to read and maintain.
 
 This library provides a DSL for creating page objects that model the hierarchical structure of HTML and custom assertions that can be used when writing end-to-end tests.
 
