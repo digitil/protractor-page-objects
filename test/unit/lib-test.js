@@ -35,7 +35,7 @@ describe('PageObjects', function () {
         beforeEach(function() {
             app = new PageObjects();
         });
-        
+
         it('should create a new Page', function () {
             app.$page({
                 name: 'Home'

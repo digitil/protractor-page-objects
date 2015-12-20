@@ -1,6 +1,6 @@
 var jshint = require('gulp-jshint');
 var gulp   = require('gulp');
- 
+
 gulp.task('jshint', function () {
     var javascript = ['lib', 'test']
         .map(function (dir) {
@@ -9,5 +9,6 @@ gulp.task('jshint', function () {
 
     return gulp.src(javascript)
         .pipe(jshint())
-        .pipe(jshint.reporter('default'));
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(jshint.reporter('fail'));
 });

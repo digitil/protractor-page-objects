@@ -5,7 +5,7 @@
     "futurehostile": true,
     "latedef": "nofunc",
     "maxcomplexity": 9,
-    "maxdepth": 2,
+    "maxdepth": 3,
     "maxparams": 3,
     "maxstatements": 15,
     "noarg": true,
