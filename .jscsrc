@@ -3,6 +3,8 @@
     "validateIndentation": 4,
     "safeContextKeyword": "self",
     "requirePaddingNewLinesBeforeLineComments": false,
+    "validateLineBreaks": false,
+    "requireTrailingComma": false,
 
     "plugins": [
         "jscs-jsdoc"

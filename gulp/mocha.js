@@ -15,10 +15,7 @@ function mochaErrorHandler(error) {
 gulp.task('mocha', function() {
     return gulp.src(Files.UNIT, { read: false })
         .pipe(mocha())
-        .on("error", function (err) {
-            console.log(err.toString());
-            this.emit('end');
-        });
+        .on("error", mochaErrorHandler);
 });
 
 gulp.task('mocha-coverage', function() {
@@ -27,10 +24,7 @@ gulp.task('mocha-coverage', function() {
     return gulp.src(Files.UNIT, { read: false })
         .pipe(cover.instrument(coverageConfig))
         .pipe(mocha())
-        .on("error", function (err) {
-            console.log(err.toString());
-            this.emit('end');
-        })
+        .on("error", mochaErrorHandler)
         .pipe(cover.gather())
         .pipe(cover.format())
         .pipe(gulp.dest('reports'));
