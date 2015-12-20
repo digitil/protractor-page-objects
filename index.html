@@ -43,27 +43,77 @@
 
 
     <section>
-        <article><h1>protractor-page-objects</h1><p>A page-object factory for <a href="http://www.protractortest.org/">Protractor</a>.</p>
-<p>Using page objects makes it easier to interact with elements on the page. Rather than redefine actions or components in the app, use page objects to encapsulate that information, &quot;DRY&quot; up test code, and make scenarios easier to read and maintain. </p>
-<p>This library provides a DSL for creating page objects that model the hierarchical structure of HTML and custom assertions that can be used when writing end-to-end tests.</p>
-<p>For more motivation on using page objects, there's a great, short article by Martin Fowler on what a page object is and why they are useful. <a href="http://martinfowler.com/bliki/PageObject.html">PageObject</a>.</p>
-<h1>Getting started</h1><pre class="prettyprint source"><code>npm install protractor-page-objects --save</code></pre><h1>For contributors</h1><p>Contributions are very much welcomed and appreciated. Feel free to open an issue or a pull request.</p>
-<p>This project uses <a href="https://www.npmjs.com/#getting-started">npm</a> and <a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md">gulp</a>.</p>
-<ol>
-<li><p>Install dependencies</p>
-<p> <code>npm install</code></p>
-</li>
-<li><p>Test your changes</p>
-<p> <code>gulp</code></p>
-<p> In lieu of a formal styleguide, javascript files are linted as part of the default gulp task.</p>
-</li>
-<li><p>Update the docs</p>
-<p> <code>gulp jsdoc</code></p>
-</li>
-<li><p>Freeze any dependency versions before committing</p>
-<p> <code>npm shrinkwrap</code></p>
-</li>
-</ol></article>
+        <article><p>The goal of this library is to transform a test like this one </p>
+<pre class="prettyprint source lang-javascript"><code>    describe('angularjs homepage todo list', function() {
+      it('should add a todo', function() {
+        browser.get('https://angularjs.org');
+
+        element(by.model('todoList.todoText')).sendKeys('write first protractor test');
+        element(by.css('[value=&quot;add&quot;]')).click();
+
+        var todoList = element.all(by.repeater('todo in todoList.todos'));
+        expect(todoList.count()).toEqual(3);
+        expect(todoList.get(2).getText()).toEqual('write first protractor test');
+
+        // You wrote your first test, cross it off the list
+        todoList.get(2).element(by.css('input')).click();
+        var completedAmount = element.all(by.css('.done-true'));
+        expect(completedAmount.count()).toEqual(2);
+      });
+    });</code></pre><p>into something easier to write, read and maintain</p>
+<pre class="prettyprint source lang-javascript"><code>    describe('angularjs homepage todo list', function() {
+      it('should add a todo', function() {
+        AngularHome.goTo();
+        AngularHome.Todo.addTodo('write first protractor test');
+        var todoList = AngularHome.Todo.list;
+        todoList.expectCount().toBe(3);
+        expect(todoList.nth(2).getText()).toEqual('write first protractor test');
+
+        // You wrote your first test, cross it off the list
+        todoList.markCompletedByIndex(2);
+        AngularHome.Todo.completed.expectCount().toBe(2);
+      });
+    });</code></pre><h2>Defining the page object</h2><p><code>protractor-page-objects</code> provides a consistent way to define pages using plain old javascript objects. </p>
+<pre class="prettyprint source lang-javascript"><code>    {
+        name: 'AngularHome',
+        path: 'https://angularjs.org',
+        components: [
+            {
+                name: 'Todo',
+                locator: by.css('[module=todoApp]'),
+                components: [
+                    {
+                        name: 'list',
+                        locator: by.repeater('todo in todoList.todos'),
+                        methods: {
+                            markCompletedByIndex: function(index) {
+                                this.nth(index).element(by.css('input')).click();
+                            }
+                        }
+                    },
+                    {
+                        name: 'completed',
+                        locator: by.css('.done-true')
+                    }
+                ],
+                methods: {
+                    addTodo: function(text) {
+                        this.element(by.model('todoList.todoText'))
+                            .sendKeys(message);
+                        this.element(by.css('[value=&quot;add&quot;]')).click();
+                    }
+                }
+            }
+        ]
+    }</code></pre><h2>Use the object</h2><p>The entrypoint is the <code>PageObjects</code> class. Page definitions are given as arguments to its constructor.</p>
+<pre class="prettyprint source lang-javascript"><code>    // use the object we defined above (as angularHomePage)
+    var app = new PageObjects(angularHomePage);
+    var AngularHome = app.AngularHome;
+
+    describe(function() {
+        // continue with the test we had above
+        ...
+    });</code></pre></article>
     </section>
 
 
@@ -80,7 +130,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat Dec 19 2015 16:52:53 GMT-0500 (Eastern Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat Dec 19 2015 21:26:08 GMT-0500 (Eastern Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
