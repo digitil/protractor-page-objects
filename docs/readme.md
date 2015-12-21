@@ -1,4 +1,4 @@
-The goal of this library is to transform a test like this one 
+The goal of this library is to transform a test like this one
 
 ```javascript
     describe('angularjs homepage todo list', function() {
@@ -40,7 +40,7 @@ into something easier to write, read and maintain
 
 ## Defining the page object
 
-`protractor-page-objects` provides a consistent way to define pages using plain old javascript objects. 
+`protractor-page-objects` provides a consistent way to define pages using plain old javascript objects.
 
 ```javascript
     {
@@ -67,9 +67,10 @@ into something easier to write, read and maintain
                 ],
                 methods: {
                     addTodo: function(text) {
-                        this.element(by.model('todoList.todoText'))
-                            .sendKeys(message);
-                        this.element(by.css('[value="add"]')).click();
+                        var todoList = this.element();
+                        todoList.element(by.model('todoList.todoText'))
+                            .sendKeys(text);
+                        todoList.element(by.css('[value="add"]')).click();
                     }
                 }
             }
@@ -77,11 +78,12 @@ into something easier to write, read and maintain
     }
 ```
 
-## Use the object 
+## Use the object
 
 The entrypoint is the `PageObjects` class. Page definitions are given as arguments to its constructor.
 
 ```javascript
+    var PageObjects = require('protractor-page-objects');
     // use the object we defined above (as angularHomePage)
     var app = new PageObjects(angularHomePage);
     var AngularHome = app.AngularHome;

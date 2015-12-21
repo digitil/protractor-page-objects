@@ -40,11 +40,12 @@ into
       it('should add a todo', function() {
         AngularHome.goTo();
         AngularHome.Todo.addTodo('write first protractor test');
-        AngularHome.Todo.list.expectCount().toBe(3);
-        AngularHome.Todo.list.nth(2).matches('write first protractor test');
+        var todoList = AngularHome.Todo.list;
+        todoList.expectCount().toBe(3);
+        expect(todoList.nth(2).getText()).toEqual('write first protractor test');
 
         // You wrote your first test, cross it off the list
-        AngularHome.Todo.list.nth(2).markCompleted();
+        todoList.markCompletedByIndex(2);
         AngularHome.Todo.completed.expectCount().toBe(2);
       });
     });
@@ -54,7 +55,7 @@ into
 
     npm install protractor-page-objects --save
 
-Check out the API and examples in the [docs](http://digitil.github.io/compass-for-protractor/)
+Check out the API and examples in the [docs](http://digitil.github.io/protractor-page-objects/)
 
 # For contributors
 
