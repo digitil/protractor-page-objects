@@ -1,26 +1,26 @@
 var app = require('./app.po.js');
 var Page = app.Page;
-var FormView = require('./pages/form.po.js');
-var RepeaterView = require('./pages/repeater.po.js');
+var FormView = Page.Form;
+var RepeaterView = Page.Repeater;
 
 
 describe('refapp landing page', function() {
     it('should have page title "My AngularJS App"', function() {
-        app.goTo(app.Page);
+        Page.goTo();
         expect(browser.getTitle()).toEqual('My AngularJS App');
     });
 });
 
 describe('views', function() {
     it('should have form view', function() {
-        app.goTo(FormView);
+        FormView.goTo();
         FormView.at();
     });
 });
 
 describe('using an ActionSequence', function() {
     beforeEach(function() {
-        app.goTo(FormView);
+        FormView.goTo();
     });
 
     it('should drag and drop', function() {
@@ -33,21 +33,19 @@ describe('using an ActionSequence', function() {
 
 describe('navigation', function() {
     beforeEach(function() {
-        app.goTo(FormView);
+        FormView.goTo();
     });
 
     it('should deal with alerts', function() {
-        var alertButton = FormView.alertButton;
-        alertButton.click();
+        FormView.alertButton.click();
         var alertDialog = browser.switchTo().alert();
         expect(alertDialog.getText()).toEqual('Hello');
         alertDialog.accept();
     });
 
     it('should refresh properly', function() {
-        var username = FormView.username;
         var name = element(by.binding('username'));
-        username.element().clear();
+        FormView.username.element().clear();
         expect(name.getText()).toEqual('');
         browser.navigate().refresh();
         expect(name.getText()).toEqual('Anon');

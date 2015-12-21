@@ -1,43 +1,63 @@
 {
-  "name": "compass-for-protractor",
-  "version": "0.1.0",
-  "description": "A component wrapper around Angular's Protractor Framework",
+  "name": "protractor-page-objects",
+  "version": "1.0.0",
+  "description": "A page object factory for angular protractor",
   "main": "index.js",
   "directories": {
-    "example": "examples",
+    "doc": "docs",
     "test": "test"
   },
   "dependencies": {
-    "chai": "^1.9.1",
-    "chai-as-promised": "^4.1.1",
+    "chai": "~1.10.0",
+    "chai-as-promised": "~4.3.0",
     "change-case": "^2.1.4",
-    "express": "^4.8.3",
-    "jshint": "^2.5.3",
-    "protractor": "^1.0.0",
-    "sinon": "^1.10.3",
-    "sinon-chai": "^2.5.0"
+    "protractor": "~2.5.1",
+    "extend": "~3.0.0",
+    "chromedriver": "~2.19.0"
   },
   "devDependencies": {
-    "chromedriver": "^2.10.0-1",
-    "express": "^4.8.4",
-    "jshint": "^2.5.3",
-    "mocha": "^1.21.4",
-    "sinon": "^1.10.3",
-    "sinon-chai": "^2.5.0"
+    "gulp": "~3.9.0",
+    "gulp-angular-protractor": "0.0.4",
+    "gulp-coverage": "~0.3.36",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-jscs": "~3.0.1",
+    "gulp-jshint": "~1.10.0",
+    "gulp-live-server": "0.0.29",
+    "gulp-mocha": "~2.1.3",
+    "gulp-util": "~3.0.6",
+    "jscs-jsdoc": "~1.2.0",
+    "jsdoc": "~3.4.0",
+    "jshint-stylish": "^2.1.0",
+    "run-sequence": "^1.1.5",
+    "sinon": "~1.17.1",
+    "sinon-chai": "~2.8.0"
   },
   "scripts": {
-    "test": "make test"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/digitil/compass-for-protractor.git"
+    "url": "https://github.com/digitil/protractor-page-objects.git"
   },
   "keywords": [
     "angular",
     "protractor",
     "e2e",
+    "page",
+    "object",
     "api"
   ],
-  "author": "Calvin McEachron <calvin@digitil.me>",
-  "license": "MIT"
+  "author": {
+    "name": "Calvin McEachron",
+    "email": "calvin@digitil.me",
+    "url": "http://calvinmceachron.com"
+  },
+  "license": "BSD-2-Clause",
+  "optionalDependencies": {
+    "chromedriver": "~2.19.0"
+  },
+  "bugs": {
+    "url": "https://github.com/digitil/protractor-page-objects/issues"
+  }
 }

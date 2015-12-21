@@ -1,0 +1,35 @@
+{
+    "preset": "airbnb",
+    "validateIndentation": 4,
+    "safeContextKeyword": "self",
+    "requirePaddingNewLinesBeforeLineComments": false,
+    "validateLineBreaks": false,
+    "requireTrailingComma": false,
+
+    "plugins": [
+        "jscs-jsdoc"
+    ],
+
+    "jsDoc": {
+        "checkAnnotations": {
+            "preset": "jsdoc3",
+            "extra": {}
+        },
+        "enforceExistence": {
+            "allExcept": ["expressions", "exports"]
+        },
+
+        "checkParamExistence": true,
+        "checkParamNames": true,
+        "requireParamTypes": true,
+        "checkRedundantParams": true,
+        "requireHyphenBeforeDescription": true,
+
+        "requireReturnTypes": true,
+        "checkReturnTypes": true,
+        "checkRedundantReturns": true,
+
+        "requireNewlineAfterDescription": true,
+        "checkTypes": "capitalizedNativeCase"
+    }
+}
