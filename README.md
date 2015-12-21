@@ -1,6 +1,7 @@
 # protractor-page-objects
 
 [![Build Status](https://travis-ci.org/digitil/protractor-page-objects.svg)](https://travis-ci.org/digitil/protractor-page-objects)
+[![Coverage Status](https://coveralls.io/repos/digitil/protractor-page-objects/badge.svg?branch=master&service=github)](https://coveralls.io/github/digitil/protractor-page-objects?branch=master)
 
 A page-object factory for [Protractor][].
 

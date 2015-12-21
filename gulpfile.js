@@ -7,7 +7,7 @@ gulp.task('test', ['mocha', 'protractor']);
 gulp.task('default', ['lint', 'test']);
 
 gulp.task('ci', function() {
-	sequence('lint', 'mocha-coverage', 'protractor-ci');
+	sequence('lint', 'mocha-ci', 'protractor-ci');
 });
 
 gulp.task('publish', function() {
