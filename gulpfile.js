@@ -11,5 +11,5 @@ gulp.task('ci', function() {
 });
 
 gulp.task('publish', function() {
-	sequence('default', 'jsdoc', 'gh-pages');
+	sequence('jsdoc', 'gh-pages');
 });
