@@ -67,10 +67,9 @@ into something easier to write, read and maintain
                 ],
                 methods: {
                     addTodo: function(text) {
-                        var todoList = this.element();
-                        todoList.element(by.model('todoList.todoText'))
+                        this.find(by.model('todoList.todoText'))
                             .sendKeys(text);
-                        todoList.element(by.css('[value="add"]')).click();
+                        this.find(by.css('[value="add"]')).click();
                     }
                 }
             }
