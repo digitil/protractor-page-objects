@@ -1,8 +1,16 @@
 language: node_js
 node_js:
-    - "stable"
+- stable
 before_script:
-    - "npm install -g gulp"
-    - "export DISPLAY=:99.0"
-    - "sh -e /etc/init.d/xvfb start"
+- npm install -g gulp
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
 script: gulp ci
+deploy:
+  provider: npm
+  email: calvin@digitil.me
+  on:
+    repo: digitil/protractor-page-objects
+    branch: master
+  api_key:
+    secure: SpDo6iKdYAh1GKt25L09W/xIh3gmRWJAzDQJMdJExFhTFpXpkeONc+AanKxk1gxHGwxQvpuEK6/OcdIbrulXltKhSVmTqnzSXRz07F/61BE5SuEU6fJvvnAhRc+N6UBK3lR3zuPPmtZrGgUrhjHB0PQO/1FiTQGPluBhQ5vSSRs28Ia13QDgZdSe/3Yo6mItUvwXrzEGobt+PwSzMsAvWqCDoQCtOdIkjYL2jD0+SthXFHqI+3vkETbymeh8euvW0zb3XrH50KUSh0ZWRQkcoR+niOLKrESs48bGN2xYStXMFLXCatPh3aPVOtliL2vSbZ4XPxyEcth8fh+TY5LhftbJmEDZ94eE53EMF1NWwxVTt0r+pbRZbBq4skIbmlOnxxJXtzEauSuc0jEs6mCUra+LMJSfDx715FMjjyzW2AEp1yDCYrkztNE27zlgqhiFt8k3XsE8cvtoz0OMmmZ5K2zzgW1wZ6z89Cl0wTMsjIkOcqRk2rGa2mb1O5lftAy/I6qeeu/q4Cg6dyK02SrNA6Fl+wH72bD4052N0dvP0x/5Jy4PAZalg3N0LjKaEUCc5BGwISBNdNDop0BC2EPuTb9gg+4nzXdkFQ4Trz9J9iHJrhLaUA0EhxqFfbm7OXh1oiS3uSrZIrntf9o+BxixLkfaYrwj+wxkqo4zn0JECUo=
