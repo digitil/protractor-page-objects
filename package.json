@@ -1,6 +1,6 @@
 {
   "name": "protractor-page-objects",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A page object factory for angular protractor",
   "main": "index.js",
   "directories": {
