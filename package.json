@@ -1,6 +1,6 @@
 {
   "name": "protractor-page-objects",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A page object factory for angular protractor",
   "main": "index.js",
   "directories": {
@@ -12,8 +12,7 @@
     "chai-as-promised": "~4.3.0",
     "change-case": "^2.1.4",
     "protractor": "~2.5.1",
-    "extend": "~3.0.0",
-    "chromedriver": "~2.19.0"
+    "extend": "~3.0.0"
   },
   "devDependencies": {
     "gulp": "~3.9.0",
