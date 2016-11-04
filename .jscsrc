@@ -5,6 +5,10 @@
     "requirePaddingNewLinesBeforeLineComments": false,
     "validateLineBreaks": false,
     "requireTrailingComma": false,
+    "maximumLineLength": {
+        value: 100,
+        allExcept: ['regex', 'comments']
+    },
 
     "plugins": [
         "jscs-jsdoc"
