@@ -15,6 +15,7 @@
     "extend": "~3.0.0"
   },
   "devDependencies": {
+    "chromedriver": "~2.25.1",
     "gulp": "~3.9.1",
     "gulp-angular-protractor": "0.2.0",
     "gulp-coverage": "~0.3.38",
@@ -31,6 +32,9 @@
     "run-sequence": "^1.2.2",
     "sinon": "~1.17.6",
     "sinon-chai": "~2.8.0"
+  },
+  "engines": {
+    "node": "~6.2.2"
   },
   "scripts": {
     "test": "gulp test"
@@ -53,9 +57,6 @@
     "url": "http://calvinmceachron.com"
   },
   "license": "BSD-2-Clause",
-  "optionalDependencies": {
-    "chromedriver": "~2.25.1"
-  },
   "bugs": {
     "url": "https://github.com/digitil/protractor-page-objects/issues"
   }
