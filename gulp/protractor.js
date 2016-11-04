@@ -25,7 +25,7 @@ gulp.task('protractor', ['serve-testapp'], function () {
     var config = {
             configFile: 'test/integration/conf.js',
             autoStartStopServer: true,
-            debug: true
+            debug: false
         };
 
     return runProtractor(config);
@@ -35,7 +35,7 @@ gulp.task('protractor-ci', ['serve-testapp'], function () {
     var config = {
             configFile: 'test/integration/conf.ci.js',
             autoStartStopServer: true,
-            debug: true
+            debug: false
         };
 
     return runProtractor(config);
