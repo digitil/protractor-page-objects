@@ -1,14 +1,30 @@
 {
     "preset": "airbnb",
+
     "validateIndentation": 4,
     "safeContextKeyword": "self",
     "requirePaddingNewLinesBeforeLineComments": false,
     "validateLineBreaks": false,
     "requireTrailingComma": false,
     "maximumLineLength": {
-        value: 100,
-        allExcept: ['regex', 'comments']
+        "value": 100,
+        "allExcept": [
+            "regex", 
+            "comments"
+        ]
     },
+
+    "disallowIdenticalDestructuringNames": true,
+    "disallowSpacesInsideTemplateStringPlaceholders": true,
+    "disallowVar": true,
+    "requireArrayDestructuring": true,
+    "requireArrowFunctions": true,
+    "requireEnhancedObjectLiterals": true,
+    "requireObjectDestructuring": true,
+    "requireShorthandArrowFunctions": true,
+    "requireSpaceBeforeDestructuredValues": true,
+    "requireSpread": true,
+    "requireTemplateStrings": true,
 
     "plugins": [
         "jscs-jsdoc"
@@ -20,7 +36,7 @@
             "extra": {}
         },
         "enforceExistence": {
-            "allExcept": ["expressions", "exports"]
+            "allExcept": ["expressions", "exports", "arrow"]
         },
 
         "checkParamExistence": true,
