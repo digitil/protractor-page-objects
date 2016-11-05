@@ -1,14 +1,10 @@
-var sinon = require('./deps').sinon;
-var expect = require('./deps').expect;
-var Page = require('./deps').Page;
-var View = require('./deps').View;
-var Component = require('./deps').Component;
+const { sinon, expect, Page, View, Component } = require('./deps');
 
-describe('Page', function() {
-    var page;
+describe('Page', () => {
+    let page;
 
-    describe('constructor', function() {
-        it('should create Views for any defined in the PageDefinition', function() {
+    describe('constructor', () => {
+        it('should create Views for any defined in the PageDefinition', () => {
             page = new Page({
                 views: [
                     {
@@ -23,7 +19,7 @@ describe('Page', function() {
             expect(page.AppSettings).to.be.an.instanceof(View);
         });
 
-        it('should create Components on the Page for any defined in the PageDefinition', function() {
+        it('should create Components on the Page for any defined in the PageDefinition', () => {
             page = new Page({
                 components: [
                     {
@@ -39,18 +35,18 @@ describe('Page', function() {
         });
     });
 
-    describe('goTo method', function() {
-        beforeEach(function() {
+    describe('goTo method', () => {
+        beforeEach(() => {
             global.browser = { get: sinon.spy() };
             page = new Page({path: 'home'});
         });
 
-        it('should go to the path defined for the Page when called with no arguments', function() {
+        it('should go to the path defined for the Page when called with no arguments', () => {
             page.goTo();
             expect(browser.get).to.have.been.calledWith('home');
         });
 
-        it('should return a path relative to the path defined for the Page', function() {
+        it('should return a path relative to the path defined for the Page', () => {
             page.goTo('welcome/landing');
             expect(browser.get).to.have.been.calledWith('home/welcome/landing');
         });
@@ -64,7 +60,7 @@ describe('Page', function() {
             expect(browser.get).to.have.been.calledWith('home/welcome/landing?forever=young');
         });
 
-        it('should handle a request object as first positional argument', function() {
+        it('should handle a request object as first positional argument', () => {
             page.goTo({state: "first"});
             expect(browser.get).to.have.been.calledWith('home?state=first');
         });
@@ -78,7 +74,7 @@ describe('Page', function() {
             expect(browser.get).to.have.been.calledWith('home?forever=young&state=first');
         });
 
-        it('should handle a string path as first positional argument and request object as second', function() {
+        it('should handle a string path as first positional argument and request object as second', () => {
             page.goTo('welcome/landing', {state: "first"});
             expect(browser.get).to.have.been.calledWith('home/welcome/landing?state=first');
             
@@ -92,7 +88,7 @@ describe('Page', function() {
     });
 
     describe('$view factory method', function () {
-        it('should create a new View attached to this page', function() {
+        it('should create a new View attached to this page', () => {
             page = new Page({$path: 'home/page'});
             page.$view({
                 name: 'myView',
@@ -105,12 +101,12 @@ describe('Page', function() {
         });
     });
 
-    describe('$component factory method', function() {
-        beforeEach(function() {
+    describe('$component factory method', () => {
+        beforeEach(() => {
             page = new Page({path: 'home/page'});
         });
 
-        it('should create Component children', function() {
+        it('should create Component children', () => {
             page.$component({
                 name: 'componentName',
                 locator: '.componentSelector'
@@ -119,7 +115,7 @@ describe('Page', function() {
             expect(page.componentName).to.be.an.instanceof(Component);
         });
 
-        it('should return the created Component', function() {
+        it('should return the created Component', () => {
             var component = page.$component({
                 name: 'componentName',
                 locator: '.componentSelector'

@@ -1,12 +1,10 @@
-var expect = require('./deps').expect;
-var PageObjects = require('./deps').PageObjects;
-var Page = require('./deps').Page;
+const { expect, PageObjects, Page } = require('./deps');
 
-describe('PageObjects', function () {
-    var app;
+describe('PageObjects', () => {
+    let app;
 
-    describe('constructor', function () {
-        it('should create Page objects from an array of PageDefinition objects', function () {
+    describe('constructor', () => {
+        it('should create Page objects from an array of PageDefinition objects', () => {
             app = new PageObjects([
                 {name: 'pageOne'},
                 {name: 'pageTwo'},
@@ -18,7 +16,7 @@ describe('PageObjects', function () {
             expect(app.pageThree).to.be.an.instanceof(Page);
         });
 
-        it('should create Page objects from PageDefinition arguments', function () {
+        it('should create Page objects from PageDefinition arguments', () => {
             app = new PageObjects(
                 {name: 'pageOne'},
                 {name: 'pageTwo'},
@@ -31,12 +29,12 @@ describe('PageObjects', function () {
         });
     });
 
-    describe('$$page factory method', function () {
-        beforeEach(function() {
+    describe('$$page factory method', () => {
+        beforeEach(() => {
             app = new PageObjects();
         });
 
-        it('should create a new Page', function () {
+        it('should create a new Page', () => {
             app.$page({
                 name: 'Home'
             });

@@ -1,19 +1,17 @@
-var sinon = require('./deps').sinon;
-var expect = require('./deps').expect;
-var Component = require('./deps').Component;
+const { sinon, expect, Component } = require('./deps');
 
-describe('Component', function() {
-    var component;
+describe('Component', () => {
+    let component;
 
-    beforeEach(function() {
+    beforeEach(() => {
         component = new Component({
             name: 'name',
             locator: '.selector'
         });
     });
 
-    describe('constructor', function () {
-        it('should create child Components for any defined in ComponentDefinition', function() {
+    describe('constructor', () => {
+        it('should create child Components for any defined in ComponentDefinition', () => {
             component = new Component({
                 components: [
                     { name: 'toolbox' },
@@ -25,26 +23,26 @@ describe('Component', function() {
         });
     });
 
-    describe('mixin class method', function () {
-        it('should have mixin method for inheritable methods', function() {
+    describe('mixin class method', () => {
+        it('should have mixin method for inheritable methods', () => {
             function MyClass() {}
             Component.mixin(MyClass);
-            var instance = new MyClass();
+            const instance = new MyClass();
             expect(instance).to.respondTo('$component');
         });
     });
 
-    describe('$component as factory method', function() {
-        it('should create component instances', function() {
-            var button = component.$component({
+    describe('$component as factory method', () => {
+        it('should create component instances', () => {
+            const button = component.$component({
                 name: 'button',
                 locator: '.btn'
             });
             expect(button).to.be.an.instanceof(Component);
         });
 
-        it('should create a property on the instance', function() {
-            var button = component.$component({
+        it('should create a property on the instance', () => {
+            const button = component.$component({
                 name: 'button',
                 locator: '.btn'
             });
@@ -53,43 +51,43 @@ describe('Component', function() {
         });
     });
 
-    describe('$component as accessor method', function() {
-        var child;
+    describe('$component as accessor method', () => {
+        let child;
 
-        beforeEach(function() {
+        beforeEach(() => {
             child = component.$component({
                 name: 'button',
                 locator: '.btn'
             });
         });
 
-        it('should retrieve a defined Component', function() {
+        it('should retrieve a defined Component', () => {
             expect(component.$component('button')).to.equal(child);
         });
 
-        it('should throw Error if requested Component is not defined', function() {
-            var spy = sinon.spy(component, '$component');
+        it('should throw Error if requested Component is not defined', () => {
+            const spy = sinon.spy(component, '$component');
             try { component.$component('foo'); } catch(error) {}
             expect(spy).to.have.thrown('ReferenceError');
         });
     });
 
-    describe('$component as clone method', function() {
-        var copied;
+    describe('$component as clone method', () => {
+        let copied;
 
-        beforeEach(function() {
+        beforeEach(() => {
             copied = new Component({
                 name: 'copied',
                 locator: '.copied',
                 methods: {
-                    whoami:  function() {
-                        return "I am " + this.$.name + " with selector " + this.$.locator;
+                    whoami() {
+                        return `I am ${this.$.name} with selector ${this.$.locator}`;
                     }
                 }
             });
         });
 
-        it('should add the copied Component as a child', function() {
+        it('should add the copied Component as a child', () => {
             component.$component(new Component({
                 name: 'copied',
                 locator: '.copied'
@@ -98,7 +96,7 @@ describe('Component', function() {
             expect(component.copied).to.be.instanceof(Component);
         });
 
-        it('should accept a new name and locator', function() {
+        it('should accept a new name and locator', () => {
             component.$component(copied, {
                 name: 'foo',
                 locator: '.bar'
@@ -109,7 +107,7 @@ describe('Component', function() {
             expect(component.foo.$.locator).to.equal('.bar');
         });
 
-        it('should update reference to `this` in any added methods', function() {
+        it('should update reference to `this` in any added methods', () => {
             component.$component(copied, {
                 name: 'changed',
                 locator: '.changed'
@@ -119,26 +117,26 @@ describe('Component', function() {
         });
     });
 
-    describe('$methods property', function() {
+    describe('$methods property', () => {
         beforeEach(function () {
             component = new Component({
                 name: 'name', 
                 locator: '.selector',
                 methods: {
-                    foo: function (bar) { return bar; },
-                    getButtonSelector: function () {
+                    foo(bar) { return bar; },
+                    getButtonSelector() {
                         return this.button.$.locator;
                     }
                 }
             });
         });
 
-        it('should define methods on the component', function () {
+        it('should define methods on the component', () => {
             expect(component).to.respondTo('foo');
             expect(component.foo('bar')).to.equal('bar');
         });
 
-        it('should define instance methods', function() {
+        it('should define instance methods', () => {
             component.$component({
                 name: 'button',
                 locator: '.my-button-selector'
@@ -147,21 +145,21 @@ describe('Component', function() {
         });
     });
 
-    describe('set method', function() {
-        var parent;
+    describe('set method', () => {
+        let parent;
 
-        beforeEach(function () {
+        beforeEach(() => {
             parent = new Component({
                 name: 'parent',
                 locator: '#parent'
             });
         });
 
-        it('should update name, selector and parent', function(){
+        it('should update name, selector and parent', () => {
             component.$set({
                 name: 'newName',
                 locator: '.newSelector',
-                parent: parent
+                parent
             });
             expect(component.$.name).to.equal('newName');
             expect(component.$.locator).to.equal('.newSelector');
@@ -169,20 +167,18 @@ describe('Component', function() {
             expect(component.$parent()).to.equal(parent);
         });
 
-        it('should update hierarchical information', function(){
+        it('should update hierarchical information', () => {
             component.$set({
                 name: 'newName',
                 locator: '.newSelector',
-                parent: parent
+                parent
             });
-            var hierarchy = component.$hierarchy().map(function (c) {
-                return c.$.name;
-            }).join(' -> ');
+            const hierarchy = component.$hierarchy().map(c => c.$.name).join(' -> ');
             expect(hierarchy).to.equal('parent -> newName');
         });
 
-        it('should update hierarchical information in child Component', function(){
-            var child = component.$component({
+        it('should update hierarchical information in child Component', () => {
+            const child = component.$component({
                 name: 'child',
                 locator: '.child'
             });
@@ -191,16 +187,14 @@ describe('Component', function() {
                 locator: '.newSelector',
                 parent: parent
             });
-            var hierarchy = child.$hierarchy().map(function (c) {
-                return c.$.name;
-            }).join(' -> ');
+            const hierarchy = child.$hierarchy().map(c => c.$.name).join(' -> ');
             expect(hierarchy).to.equal('parent -> newName -> child');
         });
     });
 
-    describe('$parent method', function() {
-        it('should return the parent Component when called without an argument', function() {
-            var child = component.$component({
+    describe('$parent method', () => {
+        it('should return the parent Component when called without an argument', () => {
+            const child = component.$component({
                 name: 'hello',
                 locator: '.world'
             });
@@ -209,47 +203,47 @@ describe('Component', function() {
         });
     });
 
-    describe('equals method', function() {
-        it('should return false if either argument is not a Component', function() {
-            var a = new Component({name: 'hello'});
-            var b = {name: 'hello'};
-            var c = new Component({name: 'hello'});
+    describe('equals method', () => {
+        it('should return false if either argument is not a Component', () => {
+            const a = new Component({name: 'hello'});
+            const b = {name: 'hello'};
+            const c = new Component({name: 'hello'});
             expect(Component.equals(a, b)).to.be.false;
             expect(Component.equals(a, c)).to.be.true;
         });
 
-        it('should return false if there are missing subcomponents', function() {
-            var a = new Component({
+        it('should return false if there are missing subcomponents', () => {
+            const a = new Component({
                 components: [
                     {name: 'hello'},
                     {name: 'world'}
                 ]
             });
-            var b = new Component({
+            const b = new Component({
                 components: [
                     {name: 'hello'}
                 ]
             });
-            var c = new Component({
+            const c = new Component({
                 components: [
                     {name: 'hello'},
                     {name: 'world'}
                 ]
             });
-            var d = new Component({});
+            const d = new Component({});
             expect(Component.equals(a, b)).to.be.false;
             expect(Component.equals(a, d)).to.be.false;
             expect(Component.equals(a, c)).to.be.true;
         });
 
-        it('should return false if subcomponents are not equal', function() {
+        it('should return false if subcomponents are not equal', () => {
             console.log('should return false if subcomponents are not equal');
-            var a = new Component({
+            const a = new Component({
                 components: [
                     {name: 'hello', locator: '.world'}
                 ]
             });
-            var b = new Component({
+            const b = new Component({
                 components: [
                     {name: 'hello', locator: '#world'}
                 ]
@@ -257,48 +251,48 @@ describe('Component', function() {
             expect(Component.equals(a, b)).to.be.false;
         });
 
-        it('should return false if there are missing methods', function() {
-            var a = new Component({
+        it('should return false if there are missing methods', () => {
+            const a = new Component({
                 methods: {
-                    hello: function() { return 'world'; }
+                    hello() { return 'world'; }
                 }
             });
-            var b = new Component({
+            const b = new Component({
                 methods: {
-                    hello: function() { return 'world'; },
-                    foo: function(bar) { return bar; }
+                    hello() { return 'world'; },
+                    foo(bar) { return bar; }
                 }
             });
-            var c = new Component({
+            const c = new Component({
                 methods: {
-                    hello: function() { return 'world'; },
-                    foo: function(bar) { return bar; }
+                    hello() { return 'world'; },
+                    foo(bar) { return bar; }
                 }
             });
             expect(Component.equals(a, b)).to.be.false;
             expect(Component.equals(b, c)).to.be.true;
         });
 
-        it('should return false if methods are defined in one component and not the other', function() {
-            var a = new Component({
+        it('should return false if methods are defined in one component and not the other', () => {
+            const a = new Component({
                 methods: {
-                    hello: function() { return 'world'; }
+                    hello() { return 'world'; }
                 }
             });
-            var b = new Component({});
+            const b = new Component({});
             expect(Component.equals(a, b)).to.be.false;
             expect(Component.equals(b, a)).to.be.false;
         });
 
-        it('should return false if methods are not equivalent', function() {
-            var a = new Component({
+        it('should return false if methods are not equivalent', () => {
+            const a = new Component({
                 methods: {
-                    hello: function() { return 'world'; }
+                    hello() { return 'world'; }
                 }
             });
-            var b = new Component({
+            const b = new Component({
                 methods: {
-                    hello: function(world) { return world; }
+                    hello(world) { return world; }
                 }
             });
             expect(Component.equals(a, b)).to.be.false;

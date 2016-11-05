@@ -1,4 +1,4 @@
-var config = require('./conf').config;
+const { config } = require('./conf');
 
 config.capabilities = {
 	browserName: 'firefox',
