@@ -1,11 +1,11 @@
-{
+{    
     "curly": true,
     "eqeqeq": true,
     "freeze": true,
     "futurehostile": true,
     "latedef": "nofunc",
     "maxcomplexity": 9,
-    "maxdepth": 2,
+    "maxdepth": 3,
     "maxparams": 3,
     "maxstatements": 15,
     "noarg": true,
@@ -17,11 +17,5 @@
     "undef": true,
     "unused": "strict",
     "node": true,
-    "expr": true,
-    "globals": {
-        "describe": false,
-        "beforeEach": false,
-        "it": false,
-        "browser": false
-    }
+    "esversion": 6
 }
