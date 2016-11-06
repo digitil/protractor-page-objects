@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const mocha = require('gulp-mocha');
 const istanbul = require('gulp-istanbul');
 const coveralls = require('gulp-coveralls');
+const path = require('path');
 
 const filesInLib = 'lib/**/*.js';
 const filesInTest = 'test/unit/**/*.js';
@@ -28,14 +29,11 @@ gulp.task('mocha-coverage', ['istanbul:instrument'], () => {
     return gulp.src(filesInTest, { read: false })
         .pipe(mocha())
         .on("error", mochaErrorHandler)
-        .pipe(istanbul.writeReports({ reporters: ['text'] }));
+        .pipe(istanbul.writeReports({ reporters: ['text', 'lcovonly'] }));
 });
 
-gulp.task('mocha-ci', ['istanbul:instrument'], () => {
-    return gulp.src(filesInTest, { read: false })
-        .pipe(mocha())
-        .on("error", mochaErrorHandler)
-        .pipe(istanbul.writeReports({ reporters: ['lcovonly'] }))
+gulp.task('mocha-ci', ['mocha-coverage'], () => {
+    return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
         .pipe(coveralls());
 });
 
