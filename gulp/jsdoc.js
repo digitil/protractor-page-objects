@@ -1,13 +1,12 @@
-var gulp = require('gulp');
-var exec = require('child_process').exec;
-var util = require('util');
-var path = require('path');
-var gls = require('gulp-live-server');
-var package = require('../package.json');
+const gulp = require('gulp');
+const { exec } = require('child_process');
+const path = require('path');
+const gls = require('gulp-live-server');
+const { name, version } = require('../package.json');
  
-gulp.task('jsdoc', function(callback) {
-    var jsdoc = path.resolve(__dirname, '../node_modules/.bin/jsdoc');
-    var command = [
+gulp.task('jsdoc', callback => {
+    const jsdoc = path.resolve(__dirname, '../node_modules/.bin/jsdoc');
+    const command = [
         jsdoc,
         '--package package.json',
         '--configure docs/conf.json',
@@ -16,7 +15,7 @@ gulp.task('jsdoc', function(callback) {
         '--tutorials docs/tutorials'
     ].join(' ');
 
-    exec(command, function (error) {
+    exec(command, error => {
         if (error) {
             return callback(error);
         }
@@ -24,17 +23,17 @@ gulp.task('jsdoc', function(callback) {
     });
 });
 
-gulp.task('serve-docs', ['jsdoc'], function() {
-    var serverPath = [
+gulp.task('serve-docs', ['jsdoc'], () => {
+    const serverPath = [
         gls.script,        
-        ['docs', package.name, package.version].join('/'),
+        ['docs', name, version].join('/'),
         8882
     ];
     server = gls(serverPath, undefined, false);
     server.start();
 });
 
-gulp.task('watch-jsdoc', ['serve-docs'], function() {
+gulp.task('watch-jsdoc', ['serve-docs'], () => {
     gulp.watch([
         'lib/**/*.js',
         'docs/**/*.md',

@@ -1,22 +1,22 @@
-var gulp = require('gulp');
-var ghPages = require('gulp-gh-pages');
-var pkg = require('../package.json');
+const gulp = require('gulp');
+const ghPages = require('gulp-gh-pages');
+const { name, version } = require('../package.json');
 
 function modifyForTravis(options) {
-    var remoteUrl = pkg.repository.url.split(/https?:\/\//)[1];
+    const remoteUrl = pkg.repository.url.split(/https?:\/\//)[1];
 
     if (process.env.TRAVIS) {
-        options.remoteUrl = 'https://' + process.env.GITHUB_TOKEN + '@' + remoteUrl;
+        options.remoteUrl = `https://${process.env.GITHUB_TOKEN}@${remoteUrl}`;
     }
 }
 
-gulp.task('gh-pages', function() {
-    var options = {
+gulp.task('gh-pages', () => {
+    const options = {
         push: true
     };
 
     modifyForTravis(options);
 
-    return gulp.src(['docs', pkg.name, pkg.version, '**/*'].join('/'))
+    return gulp.src(['docs', name, version, '**/*'].join('/'))
         .pipe(ghPages(options));
 });

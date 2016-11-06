@@ -1,11 +1,9 @@
-var jshint = require('gulp-jshint');
-var gulp   = require('gulp');
+const jshint = require('gulp-jshint');
+const gulp   = require('gulp');
 
-gulp.task('jshint', function () {
-    var javascript = ['lib', 'test']
-        .map(function (dir) {
-            return dir + '/**/*.js';
-        });
+gulp.task('jshint', () => {
+    const javascript = ['lib', 'test']
+        .map(dir => `${dir}/**/*.js`);
 
     return gulp.src(javascript)
         .pipe(jshint())

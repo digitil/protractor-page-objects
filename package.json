@@ -15,17 +15,15 @@
     "extend": "~3.0.0"
   },
   "devDependencies": {
-    "chromedriver": "~2.25.1",
     "gulp": "~3.9.1",
     "gulp-angular-protractor": "0.2.0",
-    "gulp-coverage": "~0.3.38",
     "gulp-coveralls": "^0.1.4",
     "gulp-gh-pages": "^0.5.4",
+    "gulp-istanbul": "^1.1.1",
     "gulp-jscs": "~4.0.0",
     "gulp-jshint": "^2.0.2",
     "gulp-live-server": "0.0.30",
     "gulp-mocha": "~3.0.1",
-    "gulp-util": "~3.0.7",
     "jscs-jsdoc": "~2.0.0",
     "jsdoc": "~3.4.2",
     "jshint": "^2.9.4",
@@ -50,7 +48,9 @@
     "e2e",
     "page",
     "object",
-    "api"
+    "api",
+    "test",
+    "dsl"
   ],
   "author": {
     "name": "Calvin McEachron",
