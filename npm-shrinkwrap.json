@@ -1,6 +1,6 @@
 {
   "name": "protractor-page-objects",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "dependencies": {
     "@types/jasmine": {
       "version": "2.5.37",
