@@ -1,57 +1,57 @@
-var app = require('./app.po.js');
-var Page = app.Page;
-var FormView = Page.Form;
-var RepeaterView = Page.Repeater;
+const app = require('./app.po.js');
+const Page = app.Page;
+const FormView = Page.Form;
+const RepeaterView = Page.Repeater;
 
 
-describe('refapp landing page', function() {
-    it('should have page title "My AngularJS App"', function() {
+describe('refapp landing page', () => {
+    it('should have page title "My AngularJS App"', () => {
         Page.goTo();
         expect(browser.getTitle()).toEqual('My AngularJS App');
     });
 });
 
-describe('views', function() {
-    it('should have form view', function() {
+describe('views', () => {
+    it('should have form view', () => {
         FormView.goTo();
         FormView.at();
     });
 });
 
-describe('using an ActionSequence', function() {
-    beforeEach(function() {
+describe('using an ActionSequence', () => {
+    beforeEach(() => {
         FormView.goTo();
     });
 
-    it('should drag and drop', function() {
-        var sliderBar = FormView.sliderBar;
+    it('should drag and drop', () => {
+        const sliderBar = FormView.sliderBar;
         expect(sliderBar.value()).toEqual('1');
         sliderBar.dragTo(400, 200);
         expect(sliderBar.value()).toEqual('10');
     });
 });
 
-describe('navigation', function() {
-    beforeEach(function() {
+describe('navigation', () => {
+    beforeEach(() => {
         FormView.goTo();
     });
 
-    it('should deal with alerts', function() {
+    it('should deal with alerts', () => {
         FormView.alertButton.click();
-        var alertDialog = browser.switchTo().alert();
+        const alertDialog = browser.switchTo().alert();
         expect(alertDialog.getText()).toEqual('Hello');
         alertDialog.accept();
     });
 
-    it('should refresh properly', function() {
-        var name = element(by.binding('username'));
+    it('should refresh properly', () => {
+        const name = element(by.binding('username'));
         FormView.username.element().clear();
         expect(name.getText()).toEqual('');
         browser.navigate().refresh();
         expect(name.getText()).toEqual('Anon');
     });
 
-    it('should navigate back and forward properly from link', function() {
+    it('should navigate back and forward properly from link', () => {
         Page.repeaterLink.click();
         RepeaterView.at();
         browser.navigate().back();

@@ -1,0 +1,7 @@
+gulp/
+test/
+testapp/
+.jscsrc
+.gitignore
+.travis.yml
+gulpfile.js

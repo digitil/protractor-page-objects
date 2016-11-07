@@ -1,12 +1,10 @@
-var sinon = require('./deps').sinon;
-var expect = require('./deps').expect;
-var View = require('./deps').View;
+const { sinon, expect, View } = require('./deps');
 
-describe('View', function() {
-    describe('constructor', function () {
-        var view;
+describe('View', () => {
+    describe('constructor', () => {
+        let view;
 
-        it('should remove any leading slash from the $path', function() {
+        it('should remove any leading slash from the $path', () => {
             view = new View({
                 name: 'name',
                 locator: '.selector',
@@ -15,7 +13,7 @@ describe('View', function() {
             expect(view.$.path).to.equal('some/path');
         });
 
-        it('should remove any trailing slash from the $path', function() {
+        it('should remove any trailing slash from the $path', () => {
             view = new View({
                 name: 'name',
                 locator: '.selector',
@@ -25,25 +23,25 @@ describe('View', function() {
         });
     });
 
-    describe('mixins', function() {
-        var view;
+    describe('mixins', () => {
+        let view;
 
-        beforeEach(function () {
+        beforeEach(() => {
             view = new View({
                 name: 'name',
                 locator: '.selector'
             });
         });
 
-        it('should provide $component method', function() {
+        it('should provide $component method', () => {
             expect(view).to.respondTo('$component');
         });
     });
 
-    describe('goTo method', function() {
-        var view;
+    describe('goTo method', () => {
+        let view;
 
-        beforeEach(function() {
+        beforeEach(() => {
             global.browser = { get: sinon.spy() };
             view = new View({
                 name: 'name',
@@ -52,17 +50,17 @@ describe('View', function() {
             });
         });
 
-        it('should accept route params object as first positional argument', function() {
+        it('should accept route params object as first positional argument', () => {
             view.goTo({parameter: 'home'});
             expect(browser.get).to.have.been.calledWith('sample/home/path');
         });
 
-        it('should ignore unrecognized route params', function() {
+        it('should ignore unrecognized route params', () => {
             view.goTo({parameter: 'home', foo: 'bar'});
             expect(browser.get).to.have.been.calledWith('sample/home/path');
         });
 
-        it('should accept query param object as second positional argument', function() {
+        it('should accept query param object as second positional argument', () => {
             view.goTo(null, {hello: 'world', foo: 'bar'});
             expect(browser.get).to.have.been.calledWith('sample/:parameter/path?hello=world&foo=bar');
 
