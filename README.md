@@ -1,7 +1,11 @@
 # protractor-page-objects
 
+[![npm version](https://img.shields.io/npm/v/protractor-page-objects.svg)](https://www.npmjs.com/package/protractor-page-objects)
+[![license](https://img.shields.io/github/digitil/protractor-page-objects.svg)](https://www.npmjs.com/package/protractor-page-objects)
 [![Build Status](https://travis-ci.org/digitil/protractor-page-objects.svg)](https://travis-ci.org/digitil/protractor-page-objects)
 [![Coverage Status](https://coveralls.io/repos/digitil/protractor-page-objects/badge.svg?branch=master&service=github)](https://coveralls.io/github/digitil/protractor-page-objects?branch=master)
+
+[![NPM](https://nodei.co/npm/protractor-page-objects.png)](https://www.npmjs.com/package/protractor-page-objects)
 
 A page-object factory for [Protractor][].
 

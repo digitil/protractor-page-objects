@@ -57,7 +57,7 @@
     "email": "calvin@digitil.me",
     "url": "http://calvinmceachron.com"
   },
-  "license": "BSD-2-Clause",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/digitil/protractor-page-objects/issues"
   }
