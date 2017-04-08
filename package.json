@@ -1,6 +1,6 @@
 {
   "name": "protractor-page-objects",
-  "version": "1.1.1",
+  "version": "1.2.0-prerelease.0",
   "description": "A page object factory for angular protractor",
   "main": "index.js",
   "directories": {
@@ -10,32 +10,35 @@
   "dependencies": {
     "chai": "~3.5.0",
     "chai-as-promised": "~6.0.0",
-    "change-case": "^3.0.0",
-    "protractor": "~4.0.10",
+    "change-case": "~3.0.0",
+    "dirty-chai": "~1.2.2",
     "extend": "~3.0.0"
   },
   "devDependencies": {
     "gulp": "~3.9.1",
-    "gulp-angular-protractor": "0.2.0",
-    "gulp-coveralls": "^0.1.4",
-    "gulp-gh-pages": "^0.5.4",
-    "gulp-istanbul": "^1.1.1",
+    "gulp-angular-protractor": "~0.2.0",
+    "gulp-coveralls": "~0.1.4",
+    "gulp-gh-pages": "~0.5.4",
+    "gulp-istanbul": "~1.1.1",
     "gulp-jscs": "~4.0.0",
-    "gulp-jshint": "^2.0.2",
-    "gulp-live-server": "0.0.30",
+    "gulp-live-server": "~0.0.30",
     "gulp-mocha": "~3.0.1",
     "jscs-jsdoc": "~2.0.0",
     "jsdoc": "~3.4.2",
-    "jshint": "^2.9.4",
-    "jshint-stylish": "^2.2.1",
-    "run-sequence": "^1.2.2",
+    "run-sequence": "~1.2.2",
     "sinon": "~1.17.6",
-    "sinon-chai": "~2.8.0"
+    "sinon-chai": "~2.8.0",
+    "standard": "~10.0.1"
+  },
+  "peerDependencies": {
+    "protractor": "^4.0.10"
   },
   "engines": {
     "node": "~6.2.2"
   },
   "scripts": {
+    "standard": "standard --fix",
+    "pretest": "standard",
     "test": "gulp test"
   },
   "repository": {
@@ -60,5 +63,21 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/digitil/protractor-page-objects/issues"
+  },
+  "standard": {
+    "globals": [
+      "by",
+      "beforeEach",
+      "expect",
+      "element",
+      "it",
+      "browser",
+      "describe",
+      "protractor"
+    ],
+    "ignore": [
+      "testapp/",
+      "docs/"
+    ]
   }
 }

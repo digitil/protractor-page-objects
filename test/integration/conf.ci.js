@@ -1,8 +1,8 @@
-const { config } = require('./conf');
+const { config } = require('./conf')
 
 config.capabilities = {
-	browserName: 'firefox',
-	seleniumAddress: null
-};
+  browserName: 'firefox',
+  seleniumAddress: null
+}
 
-exports.config = config;
+exports.config = config

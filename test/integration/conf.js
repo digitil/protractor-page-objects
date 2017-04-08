@@ -1,10 +1,10 @@
 exports.config = {
-    specs: ['**/*.spec.js'],
+  specs: ['**/*.spec.js'],
 
-    baseUrl: 'http://localhost:8881',
+  baseUrl: 'http://localhost:8881',
 
-    jasmineNodeOpts: {
-        isVerbose: true,
-        showColors: true
-    }
-};
+  jasmineNodeOpts: {
+    isVerbose: true,
+    showColors: true
+  }
+}
