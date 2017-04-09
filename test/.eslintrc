@@ -1,0 +1,6 @@
+env:
+  jasmine: true
+globals:
+  browser: true
+  by: true
+  element: true

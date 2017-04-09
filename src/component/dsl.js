@@ -32,6 +32,7 @@ exports.find = function (childLocator) {
  *
  * @method text
  * @memberof Component.prototype
+ * @returns {webdriver.promise.Promise.<String>}
  *
  * @example
  * expect(component.text()).toMatch(/hello world/ig);
@@ -57,6 +58,7 @@ exports.enter = function (value) {
  * @method value
  * @memberof Component.prototype
  * @param {String} value
+ * @returns {webdriver.promise.Promise<String>} if `value` is provided
  */
 exports.value = function (value) {
   if (typeof value === 'undefined') {
@@ -255,6 +257,7 @@ exports.opensNewWindow = function () {
 /**
  * @method count
  * @memberof Component.prototype
+ * @returns {webdriver.promise.Promise.<Number>}
  */
 exports.count = function () {
   const { parent, locator } = this.$
@@ -332,6 +335,7 @@ exports.all = function (method, then) {
  * @method nth
  * @memberof Component.prototype
  * @param {Number} number
+ * @returns {ElementFinder} Returns the {@link http://www.protractortest.org/#/api?view=ElementFinder|ElementFinder} for the element
  *
  * @example
  * component.nth(3).isDisplayed();
