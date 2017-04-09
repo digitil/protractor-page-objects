@@ -1,7 +1,7 @@
 'use strict'
 
 const extend = require('extend')
-const Component = require('./component')
+const Component = require('.')
 
 /**
  * Adds a subcomponent to this Component

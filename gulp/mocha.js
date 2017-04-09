@@ -7,40 +7,35 @@ const path = require('path')
 const sourceFiles = 'src/**/*.js'
 const testFiles = 'test/unit/**/*.js'
 const filesToInstrument = ['src/**/*.js', '!src/component/dsl.js']
+let failOnError = true
 
 function mochaErrorHandler (error) {
-  console.log(error.toString())
+  console.error(error.toString())
+  if (failOnError) {
+    process.exit(1)
+  }
   this.emit('end')
 }
 
-gulp.task('mocha', () => {
-  return gulp.src(testFiles, { read: false })
-        .pipe(mocha())
-        .on('error', mochaErrorHandler)
-})
-
-gulp.task('istanbul:instrument', () => {
+gulp.task('istanbul', () => {
   return gulp.src(filesToInstrument)
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
 })
 
-gulp.task('mocha-coverage', ['istanbul:instrument'], () => {
+gulp.task('mocha', ['istanbul'], () => {
   return gulp.src(testFiles, { read: false })
-        .pipe(mocha())
-        .on('error', mochaErrorHandler)
-        .pipe(istanbul.writeReports({ reporters: ['text', 'lcovonly'] }))
+    .pipe(mocha())
+    .on('error', mochaErrorHandler)
+    .pipe(istanbul.writeReports({ reporters: ['text', 'lcovonly'] }))
 })
 
-gulp.task('mocha-ci', ['mocha-coverage'], () => {
+gulp.task('coveralls', () => {
   return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
-        .pipe(coveralls())
+    .pipe(coveralls())
 })
 
 gulp.task('watch-mocha', ['mocha'], () => {
+  failOnError = false
   gulp.watch([sourceFiles, testFiles], ['mocha'])
-})
-
-gulp.task('watch-coverage', ['mocha-coverage'], () => {
-  gulp.watch([sourceFiles, testFiles], ['mocha-coverage'])
 })
