@@ -1,6 +1,6 @@
 'use strict'
 
-const Page = require('./page/page')
+const Page = require('./page')
 
 /**
  * Defines a new set of application pages.

@@ -1,8 +1,8 @@
 'use strict'
 
 const extend = require('extend')
-const View = require('../view/view')
-const Component = require('../component/component')
+const View = require('../view')
+const Component = require('../component')
 require('./methods').static(module)
 
 /**

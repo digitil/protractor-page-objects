@@ -1,7 +1,7 @@
 'use strict'
 
 const extend = require('extend')
-const Component = require('../component/component')
+const Component = require('../component')
 require('./methods').static(module)
 
 /**
