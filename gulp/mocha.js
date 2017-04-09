@@ -4,9 +4,9 @@ const istanbul = require('gulp-istanbul')
 const coveralls = require('gulp-coveralls')
 const path = require('path')
 
-const filesInLib = 'lib/**/*.js'
-const filesInTest = 'test/unit/**/*.js'
-const filesToInstrument = ['lib/**/*.js', '!lib/component/dsl.js']
+const sourceFiles = 'src/**/*.js'
+const testFiles = 'test/unit/**/*.js'
+const filesToInstrument = ['src/**/*.js', '!src/component/dsl.js']
 
 function mochaErrorHandler (error) {
   console.log(error.toString())
@@ -14,7 +14,7 @@ function mochaErrorHandler (error) {
 }
 
 gulp.task('mocha', () => {
-  return gulp.src(filesInTest, { read: false })
+  return gulp.src(testFiles, { read: false })
         .pipe(mocha())
         .on('error', mochaErrorHandler)
 })
@@ -26,7 +26,7 @@ gulp.task('istanbul:instrument', () => {
 })
 
 gulp.task('mocha-coverage', ['istanbul:instrument'], () => {
-  return gulp.src(filesInTest, { read: false })
+  return gulp.src(testFiles, { read: false })
         .pipe(mocha())
         .on('error', mochaErrorHandler)
         .pipe(istanbul.writeReports({ reporters: ['text', 'lcovonly'] }))
@@ -38,9 +38,9 @@ gulp.task('mocha-ci', ['mocha-coverage'], () => {
 })
 
 gulp.task('watch-mocha', ['mocha'], () => {
-  gulp.watch([filesInLib, filesInTest], ['mocha'])
+  gulp.watch([sourceFiles, testFiles], ['mocha'])
 })
 
 gulp.task('watch-coverage', ['mocha-coverage'], () => {
-  gulp.watch([filesInLib, filesInTest], ['mocha-coverage'])
+  gulp.watch([sourceFiles, testFiles], ['mocha-coverage'])
 })

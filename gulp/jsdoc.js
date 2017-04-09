@@ -35,7 +35,7 @@ gulp.task('serve-docs', ['jsdoc'], () => {
 
 gulp.task('watch-jsdoc', ['serve-docs'], () => {
   gulp.watch([
-    'lib/**/*.js',
+    'src/**/*.js',
     'docs/**/*.md'
   ], ['jsdoc'])
 })

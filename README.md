@@ -58,7 +58,7 @@ into
 
 # Getting started
 
-    npm install protractor-page-objects --save
+    npm install protractor-page-objects --save-dev
 
 Check out the API and examples in the [docs](http://digitil.github.io/protractor-page-objects/)
 
@@ -68,23 +68,6 @@ Contributions are very much welcomed and appreciated. Feel free to open an issue
 
 This project uses [npm][] and [gulp][].
 
-1. Install dependencies
-
-    `npm install`
-
-2. Test your changes
-
-    `gulp`
-
-    In lieu of a formal styleguide, javascript files are linted as part of the default gulp task.
-
-3. Update the docs
-
-    `gulp jsdoc`
-
-4. Freeze any dependency versions before committing
-
-    `npm shrinkwrap`
 
 [protractor]: http://www.protractortest.org/
 [npm]: https://www.npmjs.com/#getting-started

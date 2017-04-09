@@ -6,11 +6,11 @@
         "includePattern": ".+\\.js(doc|x)?$",
         "excludePattern": "(^|\\/|\\\\)_",
         "include": [
-            "lib/typedefs/",
-            "lib/PageObjects.js",
-            "lib/page/",
-            "lib/view/",
-            "lib/component/"
+            "src/typedefs/",
+            "src/PageObjects.js",
+            "src/page/",
+            "src/view/",
+            "src/component/"
         ]
     },
     "plugins": [

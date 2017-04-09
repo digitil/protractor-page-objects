@@ -7,9 +7,9 @@ gulp.task('jscs', () => {
     fix: false
   }
 
-  return gulp.src('lib/**/*.js')
+  return gulp.src('src/**/*.js')
         .pipe(jscs(options))
         .pipe(jscs.reporter())
         .pipe(jscs.reporter('fail'))
-        .pipe(gulp.dest('lib'))
+        .pipe(gulp.dest('src'))
 })

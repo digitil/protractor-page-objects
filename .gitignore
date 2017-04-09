@@ -1,7 +1,8 @@
 node_modules/
+lib/
+docs/protractor-page-objects/
 results.xml
 coverage/
 reports/
-docs/protractor-page-objects/
 .publish/
 .coveralls.yml
