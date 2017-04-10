@@ -1,46 +1,34 @@
-const gulp = require('gulp');
-const mocha = require('gulp-mocha');
-const istanbul = require('gulp-istanbul');
-const coveralls = require('gulp-coveralls');
-const path = require('path');
+const gulp = require('gulp')
+const mocha = require('gulp-mocha')
+const istanbul = require('gulp-istanbul')
 
-const filesInLib = 'lib/**/*.js';
-const filesInTest = 'test/unit/**/*.js';
-const filesToInstrument = ['lib/**/*.js', '!lib/component/dsl.js'];
+const sourceFiles = 'src/**/*.js'
+const testFiles = 'test/unit/**/*.js'
+const filesToInstrument = ['src/**/*.js', '!src/component/dsl.js']
+let failOnError = true
 
-function mochaErrorHandler(error) {
-    console.log(error.toString());
-    this.emit('end');
+function mochaErrorHandler (error) {
+  console.error(error.toString())
+  if (failOnError) {
+    process.exit(1)
+  }
+  this.emit('end')
 }
 
-gulp.task('mocha', () => {
-    return gulp.src(filesInTest, { read: false })
-        .pipe(mocha())
-        .on("error", mochaErrorHandler);
-});
-
-gulp.task('istanbul:instrument', () => {
+gulp.task('istanbul', () => {
   return gulp.src(filesToInstrument)
     .pipe(istanbul())
-    .pipe(istanbul.hookRequire());
-});
+    .pipe(istanbul.hookRequire())
+})
 
-gulp.task('mocha-coverage', ['istanbul:instrument'], () => {
-    return gulp.src(filesInTest, { read: false })
-        .pipe(mocha())
-        .on("error", mochaErrorHandler)
-        .pipe(istanbul.writeReports({ reporters: ['text', 'lcovonly'] }));
-});
-
-gulp.task('mocha-ci', ['mocha-coverage'], () => {
-    return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
-        .pipe(coveralls());
-});
+gulp.task('mocha', ['istanbul'], () => {
+  return gulp.src(testFiles, { read: false })
+    .pipe(mocha())
+    .on('error', mochaErrorHandler)
+    .pipe(istanbul.writeReports({ reporters: ['text', 'lcovonly'] }))
+})
 
 gulp.task('watch-mocha', ['mocha'], () => {
-    gulp.watch([filesInLib, filesInTest], ['mocha']);
-});
-
-gulp.task('watch-coverage', ['mocha-coverage'], () => {
-    gulp.watch([filesInLib, filesInTest], ['mocha-coverage']);
-});
+  failOnError = false
+  gulp.watch([sourceFiles, testFiles], ['mocha'])
+})

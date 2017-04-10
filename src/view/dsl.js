@@ -1,8 +1,7 @@
-/* global browser */
-'use strict';
+'use strict'
 
-const { expect } = require('chai').use(require('chai-as-promised'));
-const { getPathTo } = require('./methods');
+const { expect } = require('chai').use(require('chai-as-promised'))
+const { getPathTo } = require('./methods')
 
 /**
  * Navigates to the path for this View given the appropriate route parameters.
@@ -24,9 +23,9 @@ const { getPathTo } = require('./methods');
  * </pre>
  */
 exports.goTo = function (routeParams, queryParams) {
-    const path = getPathTo.call(this, routeParams, queryParams);
-    browser.get(path);
-};
+  const path = getPathTo.call(this, routeParams, queryParams)
+  browser.get(path)
+}
 
 /**
  * Performs an expectation testing that the current route matches the path set for this View
@@ -38,6 +37,6 @@ exports.goTo = function (routeParams, queryParams) {
  * it('should do something', function(){ myView.at(); });
  */
 exports.at = function () {
-    const regex = new RegExp(this.$.path.replace(/:[\w\-]+/g, '[^\/]+'));
-    expect(browser.getCurrentUrl()).to.eventually.match(regex);
-};
+  const regex = new RegExp(this.$.path.replace(/:[\w-]+/g, '[^/]+'))
+  expect(browser.getCurrentUrl()).to.eventually.match(regex)
+}

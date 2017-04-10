@@ -1,31 +1,31 @@
-var PageObjects = require('../../index');
+const PageObjects = require('../../lib')
 
-var form = {
-    name: 'Form',
-    locator: '[ng-view]',
-    path: '#/form',
-    components: [
+const form = {
+  name: 'Form',
+  locator: '[ng-view]',
+  path: '#/form',
+  components: [
         { name: 'sliderBar', locator: by.name('points') },
         { name: 'alertButton', locator: by.id('alertbutton') },
         { name: 'username', locator: by.model('username') }
-    ]
-};
+  ]
+}
 
-var repeater = {
-    name: 'Repeater',
-    locator: '[ng-view]',
-    path: '#/repeater'
-};
+const repeater = {
+  name: 'Repeater',
+  locator: '[ng-view]',
+  path: '#/repeater'
+}
 
-var page = {
-    name: 'Page',
-    path: '#/',
-    views: [form, repeater],
-    components: [
+const page = {
+  name: 'Page',
+  path: '#/',
+  views: [form, repeater],
+  components: [
         { name: 'repeaterLink', locator: by.linkText('repeater') }
-    ]
-};
+  ]
+}
 
-var app = new PageObjects([page]);
+const app = new PageObjects([page])
 
-module.exports = app;
+module.exports = app

@@ -1,15 +1,14 @@
-var gulp = require('gulp');
-var sequence = require('run-sequence');
-require('./gulp');
+const gulp = require('gulp')
+const sequence = require('run-sequence')
 
-gulp.task('lint', ['jshint', 'jscs']);
-gulp.task('test', ['mocha', 'protractor']);
-gulp.task('default', ['lint', 'test']);
+require('./gulp')
+
+gulp.task('test', ['mocha', 'protractor'])
 
 gulp.task('ci', () => {
-	sequence('lint', 'mocha-ci', 'protractor-ci');
-});
+  sequence('mocha', 'protractor-ci', 'coveralls')
+})
 
 gulp.task('publish', () => {
-	sequence('jsdoc', 'gh-pages');
-});
+  sequence('jsdoc', 'gh-pages')
+})

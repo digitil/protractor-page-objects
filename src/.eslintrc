@@ -1,0 +1,16 @@
+rules:
+  require-jsdoc:
+    - error
+    - require:
+        MethodDefinition: true
+        ClassDeclaration: true
+  valid-jsdoc:
+    - error
+    - requireParamDescription: false
+      requireReturn: false
+      requireReturnDescription: false
+globals:
+  protractor: true
+  browser: true
+  by: true
+  element: true

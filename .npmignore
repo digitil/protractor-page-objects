@@ -1,7 +1,9 @@
+!lib/
+src/
 gulp/
 test/
 testapp/
-.jscsrc
+.eslintrc
 .gitignore
 .travis.yml
 gulpfile.js
