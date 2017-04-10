@@ -1,5 +1,6 @@
 const gulp = require('gulp')
 const sequence = require('run-sequence')
+
 require('./gulp')
 
 gulp.task('test', ['mocha', 'protractor'])

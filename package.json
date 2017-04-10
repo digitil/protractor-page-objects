@@ -10,7 +10,6 @@
   "dependencies": {
     "chai": "~3.5.0",
     "chai-as-promised": "~6.0.0",
-    "change-case": "~3.0.0",
     "dirty-chai": "~1.2.2",
     "extend": "~3.0.0"
   },

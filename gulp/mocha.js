@@ -1,8 +1,6 @@
 const gulp = require('gulp')
 const mocha = require('gulp-mocha')
 const istanbul = require('gulp-istanbul')
-const coveralls = require('gulp-coveralls')
-const path = require('path')
 
 const sourceFiles = 'src/**/*.js'
 const testFiles = 'test/unit/**/*.js'
@@ -28,11 +26,6 @@ gulp.task('mocha', ['istanbul'], () => {
     .pipe(mocha())
     .on('error', mochaErrorHandler)
     .pipe(istanbul.writeReports({ reporters: ['text', 'lcovonly'] }))
-})
-
-gulp.task('coveralls', () => {
-  return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
-    .pipe(coveralls())
 })
 
 gulp.task('watch-mocha', ['mocha'], () => {
