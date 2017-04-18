@@ -30,6 +30,7 @@
     "gulp-live-server": "^0.0.30",
     "gulp-mocha": "^3.0.1",
     "jsdoc": "^3.4.2",
+    "nsp": "^2.6.3",
     "protractor": "^4.0.10",
     "run-sequence": "^1.2.2",
     "sinon": "^1.17.6",
@@ -43,6 +44,7 @@
     "lint:fix": "npm run lint -- --fix",
     "pretest": "npm run lint",
     "test": "gulp test",
+    "posttest": "nsp check",
     "compile": "babel src --out-dir lib --presets=es2015",
     "prepublish": "npm run compile"
   },
