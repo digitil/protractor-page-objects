@@ -1,5 +1,7 @@
 # protractor-page-objects
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/digitil/protractor-page-objects.svg)](https://greenkeeper.io/)
+
 [![npm version](https://img.shields.io/npm/v/protractor-page-objects.svg)](https://www.npmjs.com/package/protractor-page-objects)
 [![license](https://img.shields.io/npm/l/protractor-page-objects.svg)](https://www.npmjs.com/package/protractor-page-objects)
 [![Build Status](https://travis-ci.org/digitil/protractor-page-objects.svg)](https://travis-ci.org/digitil/protractor-page-objects)
